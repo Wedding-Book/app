@@ -1,9 +1,10 @@
 import type {Metadata} from "next";
 import React from 'react';
 import {AppRouterCacheProvider} from '@mui/material-nextjs/v13-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
+import {ThemeProvider} from '@mui/material/styles';
 import theme from '../theme';
 import {CssBaseline} from '@mui/material';
+import Providers from '@/components/providers/providers';
 
 export const metadata: Metadata = {
   title: "WeddingBook",
@@ -11,20 +12,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body>
-      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+    <body>
+    <AppRouterCacheProvider options={{enableCssLayer: true}}>
+      <ThemeProvider theme={theme}>
+        <Providers>
+          <CssBaseline/>
           {children}
-        </ThemeProvider>
-      </AppRouterCacheProvider>
-      </body>
+        </Providers>
+      </ThemeProvider>
+    </AppRouterCacheProvider>
+    </body>
     </html>
   );
 }

@@ -1,13 +1,11 @@
-'use client'
-import {Button} from '@mui/material';
+import serverSessionChecker from '@/components/protected/serverSessionChecker';
 
-export default function Home() {
+export default async function Home() {
+  await serverSessionChecker();
+
   return (
-    <main className='font-sans flex flex-col h-screen'>
-      <Button variant="contained" onClick={() => console.log("xddd")}>Test</Button>
-      <Button variant="outlined" onClick={() => console.log("xddd")}>Test</Button>
-      <Button variant="contained" color="secondary" onClick={() => console.log("xddd")}>Test</Button>
-      <Button variant="outlined" color="secondary" onClick={() => console.log("xddd")}>Test</Button>
-    </main>
+      <main className='font-sans flex flex-col h-screen'>
+        Nothing
+      </main>
   );
 }

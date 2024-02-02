@@ -4,21 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "prisma migrate dev --name migration && next dev",
-    "build": "next build",
+    "build": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export",
-    "postinstall": "prisma generate && prisma migrate deploy"
+    "export": "next export"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^1.2.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.7",
     "@mui/material-nextjs": "^5.15.7",
     "@prisma/client": "^5.9.0",
     "next": "14.1.0",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18"
   },
