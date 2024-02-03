@@ -29,7 +29,7 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         const user = await prisma.user.findUnique({where: {email: credentials?.email}})
-        if (!!user && user.password === null)
+        if (!credentials?.email && !!user && user.password === null)
           return null;
         if (!!user && !!user.password && !!credentials?.password){
           const validPassword = await bcrypt.compare(credentials?.password, user.password);
@@ -38,7 +38,7 @@ export const authOptions = {
           return null;
         }
         const encryptedValue = bcrypt.hashSync(credentials?.password ?? "", 10)
-        const newUser = await prisma.user.create({data: {email: credentials?.email, password: encryptedValue}})
+        const newUser = await prisma.user.create({data: {email: credentials?.email ?? "", password: encryptedValue}})
         if (newUser) {
           return newUser
         } else {
