@@ -1,6 +1,6 @@
-import {getServerSession} from 'next-auth';
-import {authOptions} from '@/app/api/auth/[...nextauth]/route';
+import {AuthOptions, getServerSession} from 'next-auth';
 import {redirect} from 'next/navigation';
+import authOptions from '@/lib/auth/authOptions';
 
 type Props = {
   noSessionPath?: string;
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const serverSessionChecker = async ({noSessionPath, sessionPath}: Props) => {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions as AuthOptions)
   if (!session){
     if (!!noSessionPath) {
       redirect(noSessionPath)
