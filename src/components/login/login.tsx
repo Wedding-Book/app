@@ -1,6 +1,5 @@
 'use client'
-import {signIn, signOut, useSession} from 'next-auth/react';
-import Loading from '@/components/loading/loading';
+import {signIn} from 'next-auth/react';
 import {Button, Divider, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 import GoogleLoginButton from '@/components/login/google/googleLoginButton';
@@ -8,7 +7,6 @@ import validateEmail from '@/util/emailValidator';
 import {useSearchParams} from 'next/navigation';
 
 export default function Login() {
-  const {data: session} = useSession()
   const searchParams = useSearchParams();
   const [email, setEmail] = useState<string | undefined>();
   const [emailValidation, setEmailValidation] = useState<string | undefined>();
@@ -56,15 +54,6 @@ export default function Login() {
     await signIn('credentials', {email, password});
   }
 
-  if (session) {
-    return (
-      <>
-        <Loading/>
-        Signed in as {session.user.email} <br/>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{display: 'flex', flexDirection: 'column', width: '400px', margin: '100px 16px 0 16px'}}>

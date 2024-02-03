@@ -1,6 +1,6 @@
 'use client'
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import {CSSObject, styled, Theme, useTheme} from '@mui/material/styles';
+import MuiAppBar, {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -17,6 +17,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {useState} from 'react';
+import UserNav from './userNav';
 
 const drawerWidth = 240;
 
@@ -41,7 +42,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
+const DrawerHeader = styled('div')(({theme}) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
@@ -56,7 +57,7 @@ interface AppBarProps extends MuiAppBarProps {
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<AppBarProps>(({theme, open}) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -72,8 +73,8 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
+const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
+  ({theme, open}) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
@@ -89,7 +90,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const Navigation = ({children}: {children: any}) => {
+type Props = {
+  children: any,
+  userImage?: string
+}
+
+const Navigation = ({children, userImage}: Props) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -118,9 +124,10 @@ const Navigation = ({children}: {children: any}) => {
           >
             <MenuIcon/>
           </IconButton>
-          <Typography variant="h5">
+          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             WeddingBook
           </Typography>
+          <UserNav userImage={userImage}/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -157,7 +164,7 @@ const Navigation = ({children}: {children: any}) => {
         </List>
       </Drawer>
       <Box component="main" sx={{flexGrow: 1, p: 3}}>
-        <DrawerHeader />
+        <DrawerHeader/>
         {children}
       </Box>
     </Box>
