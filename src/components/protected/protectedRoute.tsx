@@ -4,7 +4,7 @@ import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 import Loading from '@/components/loading/loading';
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({children}: {children: any}) => {
   const router = useRouter();
   const {data: session, status} = useSession();
 
