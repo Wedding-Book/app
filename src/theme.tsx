@@ -20,8 +20,7 @@ let theme = createTheme({
       main: '#DFB2BA',
       light: '#B7D6D8',
       dark: '#BE8D97',
-      // light: '#9BB5B7',
-      // dark: '#8A9799',
+      contrastText: '#FFF'
     },
     secondary: {
       main: '#8e86a4',

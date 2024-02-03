@@ -5,10 +5,11 @@ import {Button} from '@mui/material';
 const GoogleLoginButton = () => {
   return (
     <Button
+      style={{marginBottom:'16px'}}
       variant="contained" startIcon={<GoogleIcon/>}
       onClick={() => signIn("google")}
     >
-      Sign in with Google
+      Kontynuuj z Google
     </Button>
   );
 };
