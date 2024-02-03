@@ -73,12 +73,12 @@ export default function Login() {
         <TextField id="email" color="secondary" size="small" variant="outlined" style={{marginBottom: '16px'}}
                    required error={!!emailValidation} helperText={emailValidation}
                    onChange={(event) => onEmailChange(event.target.value)}
-                   onInput={(event) => onEmailChange(event.target.value)}
+                   onInput={(event) => onEmailChange((event.target as HTMLInputElement).value)}
                    type="email" label="Email" autoComplete="email"/>
         <TextField id="password" variant="outlined" color="secondary" size="small" style={{marginBottom: '16px'}}
                    required error={incorrectPassword} helperText={incorrectPassword ? "Niepoprawne hasło" : null}
                    onChange={(event) => onPasswordChange(event.target.value)}
-                   onInput={(event) => onPasswordChange(event.target.value)}
+                   onInput={(event) => onPasswordChange((event.target as HTMLInputElement).value)}
                    type="password" label="Hasło" autoComplete="current-password"/>
         <Button
           color="secondary"
