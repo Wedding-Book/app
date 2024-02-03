@@ -1,11 +1,13 @@
 import serverSessionChecker from '@/components/protected/serverSessionChecker';
+import Navigation from '@/components/navigation/navigation';
+import Plans from '@/app/plans/page';
 
 export default async function Home() {
   await serverSessionChecker({noSessionPath: '/login'});
 
   return (
-      <main className='font-sans flex flex-col h-screen'>
-        Nothing
-      </main>
+    <Navigation>
+      <Plans/>
+    </Navigation>
   );
 }

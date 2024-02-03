@@ -14,7 +14,6 @@ let theme = createTheme({
     fontFamily: roboto.style.fontFamily,
     fontWeightRegular: '400'
   },
-  spacing: [0, 4, 8, 16, 32, 64],
   palette: {
     primary: {
       main: '#DFB2BA',
