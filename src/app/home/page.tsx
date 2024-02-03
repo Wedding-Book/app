@@ -1,7 +1,11 @@
 import serverSessionChecker from '@/components/protected/serverSessionChecker';
+import React from 'react';
 
-export default async function Root() {
+export default async function Home() {
   await serverSessionChecker({noSessionPath: '/login'});
-  await serverSessionChecker({sessionPath: '/home'});
-  return (<></>);
+
+  return (<>
+      Test
+    </>
+  );
 }
