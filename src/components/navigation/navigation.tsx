@@ -14,10 +14,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import {useState} from 'react';
 import UserNav from './userNav';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const drawerWidth = 240;
 
@@ -107,6 +106,8 @@ const Navigation = ({children, userImage}: Props) => {
     setOpen(false);
   };
 
+  const navigation = [{icon: <CalendarMonthIcon/>, text: 'Plany', path: 'plans'}]
+
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline/>
@@ -138,15 +139,15 @@ const Navigation = ({children, userImage}: Props) => {
         </DrawerHeader>
         <Divider/>
         <List>
-          {/* TODO Menu Items list */}
-          {['Home'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{display: 'block'}}>
+          {navigation.map(nav => (
+            <ListItem key={nav.text} disablePadding sx={{display: 'block'}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                href={nav.path}
               >
                 <ListItemIcon
                   sx={{
@@ -155,9 +156,9 @@ const Navigation = ({children, userImage}: Props) => {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                  {nav.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{opacity: open ? 1 : 0}}/>
+                <ListItemText primary={nav.text} sx={{opacity: open ? 1 : 0}}/>
               </ListItemButton>
             </ListItem>
           ))}

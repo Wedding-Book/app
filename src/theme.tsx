@@ -17,7 +17,7 @@ let theme = createTheme({
   palette: {
     primary: {
       main: '#DFB2BA',
-      light: '#B7D6D8',
+      light: '#FBEAE6',
       dark: '#BE8D97',
       contrastText: '#FFF'
     },

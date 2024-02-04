@@ -8,10 +8,10 @@ import {Adapter} from 'next-auth/adapters';
 export const authOptions = {
   pages: {
     signIn: '/login',
-    signOut: '/home',
-    error: '/home',
-    verifyRequest: '/home',
-    newUser: '/home'
+    signOut: '/plans',
+    error: '/plans',
+    verifyRequest: '/plans',
+    newUser: '/plans'
   },
   session: {
     strategy: 'jwt'
