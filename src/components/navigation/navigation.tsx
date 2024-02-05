@@ -19,6 +19,7 @@ import UserNav from './userNav';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {usePathname} from 'next/navigation';
+import ReplyIcon from '@mui/icons-material/Reply';
 
 const drawerWidth = 240;
 
@@ -102,7 +103,10 @@ const Navigation = ({children, userImage}: Props) => {
   let plansNavigation: any[] = [];
 
   if (pathname.includes("/plans/")) {
-    plansNavigation = [{icon: <SettingsIcon/>, text: 'Ustawienia', path: pathname + '/settings'}]
+    plansNavigation = [
+      {icon: <SettingsIcon/>, text: 'Ustawienia', path: pathname + '/settings'},
+      {icon: <ReplyIcon/>, text: 'Udostępnij', path: pathname + '/share'}
+    ];
   }
 
   const handleDrawerOpen = () => {
