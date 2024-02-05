@@ -14,6 +14,6 @@ export default async function Home() {
 
   return (<>
     <Owned plans={userPlans}/>
-    <Shared plans={userSharedPlans}/>
+    <Shared sharedPlans={userSharedPlans}/>
   </>);
 }

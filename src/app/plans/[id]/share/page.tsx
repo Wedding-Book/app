@@ -1,9 +1,16 @@
 import {unavailablePlanRedirector} from '@/components/plans/security/unavailablePlanRedirector';
+import Share from '@/components/plans/share/share';
+import {getCollaboratorEmails} from '@/components/plans/prisma/plans';
 
-const Share = async ({params}: { params: { id: string } }) => {
+const SharedPage = async ({params}: { params: { id: string } }) => {
   await unavailablePlanRedirector(params.id);
 
-  return <div>{params.id}</div>
+  const collaboratorEmails: string[] = await getCollaboratorEmails(params.id);
+
+
+  return <>
+    <Share initCollaborators={collaboratorEmails} initPlanId={params.id}/>
+  </>
 }
 
-export default Share
+export default SharedPage;

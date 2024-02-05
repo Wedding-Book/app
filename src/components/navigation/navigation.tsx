@@ -17,9 +17,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {useState} from 'react';
 import UserNav from './userNav';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import SettingsIcon from '@mui/icons-material/Settings';
 import {usePathname} from 'next/navigation';
 import ReplyIcon from '@mui/icons-material/Reply';
+import InfoIcon from '@mui/icons-material/Info';
 
 const drawerWidth = 240;
 
@@ -102,11 +102,9 @@ const Navigation = ({children, userImage}: Props) => {
   const pathname = usePathname()
   let plansNavigation: any[] = [];
 
-  if (pathname.includes("/plans/")) {
-    plansNavigation = [
-      {icon: <SettingsIcon/>, text: 'Ustawienia', path: pathname + '/settings'},
-      {icon: <ReplyIcon/>, text: 'Udostępnij', path: pathname + '/share'}
-    ];
+  const createPath = (href: string) => {
+    const regexp = /\/([^/]+)$/;
+    return pathname.replace(regexp, href);
   }
 
   const handleDrawerOpen = () => {
@@ -116,6 +114,13 @@ const Navigation = ({children, userImage}: Props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  if (pathname.includes("/plans/")) {
+    plansNavigation = [
+      {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
+      {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
+    ];
+  }
 
   const navigation = [{icon: <CalendarMonthIcon/>, text: 'Plany', path: '/plans'}]
 

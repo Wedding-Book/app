@@ -12,11 +12,11 @@ type Props = {
 
 const PlanCard = ({id, name, description}: Props) => {
   const router = useRouter();
-  const hadnleCardClick = () => {
-    router.push(`/plans/${id}`)
+  const handleCardClick = () => {
+    router.push(`/plans/${id}/details`)
   }
 
-  return  <Card sx={{ width: 275, margin: 4, height: 150, color:'primary.main', ':hover': {backgroundColor: 'primary.light', cursor: 'pointer', color:'primary.contrastText'} }} onClick={hadnleCardClick}>
+  return  <Card sx={{ width: 275, margin: 4, height: 150, color:'primary.main', ':hover': {backgroundColor: 'primary.light', cursor: 'pointer', color:'primary.contrastText'} }} onClick={handleCardClick}>
     <CardContent>
       <Typography sx={{ fontSize: 28 }} gutterBottom>
         {name}

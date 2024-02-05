@@ -3,17 +3,17 @@ import PlanCard from '@/components/plans/planCard';
 import React from 'react';
 
 type Props = {
-  plans: PlanModel[]
+  sharedPlans: SharedPlanModel[]
 }
 
-const Shared = ({plans}: Props) => {
-  if (!plans.length) {
+const Shared = ({sharedPlans}: Props) => {
+  if (!sharedPlans.length) {
     return <></>
   }
 
   return <> <Typography sx={{fontSize: 28, color: 'secondary.main', marginLeft: 4, marginTop: 2}}>Twoje udostępnione śluby</Typography>
     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
-      {plans.map(plan => <PlanCard id={plan.id} key={plan.id} name={plan.name} description={plan.description}/>)}
+      {sharedPlans.map(sharedPlan => <PlanCard id={sharedPlan.plan.id} key={sharedPlan.plan.id} name={sharedPlan.plan.name} description={sharedPlan.plan.description}/>)}
     </div>
   </>
 }

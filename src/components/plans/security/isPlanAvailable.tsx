@@ -7,7 +7,7 @@ export const isPlanAvailable = async (id: string, session: Session | null) => {
       where: {id},
       include: {
         owner: true,
-        collaborators: true
+        collaborators: {include: {user: true}}
       },
     });
 
@@ -17,6 +17,5 @@ export const isPlanAvailable = async (id: string, session: Session | null) => {
   }
 
   const collaborators: any[] = plan.collaborators;
-  const findResult = collaborators.find(collab => collab.email === session?.user?.email)
-  return findResult > 0;
+  return !!collaborators.find(collab => collab.user.email === session?.user?.email);
 }

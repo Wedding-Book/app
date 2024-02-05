@@ -15,8 +15,18 @@ export const sharedPlans = async (session: Session | null) => {
   const userSharedPlans = await prisma.user.findUnique({
     where: {email: session?.user?.email},
     include: {
-      sharedPlans: true,
+      sharedPlans: { include: { plan: true }},
     },
   });
   return userSharedPlans.sharedPlans;
+}
+
+export const getCollaboratorEmails = async (planId: string) => {
+  const planWithCollaborators = await prisma.plan.findUnique({
+    where: {id: planId},
+    include: {
+      collaborators: { include: { user: true }},
+    },
+  });
+  return planWithCollaborators.collaborators.map((col: any) => col.user.email)
 }
