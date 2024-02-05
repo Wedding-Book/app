@@ -17,6 +17,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {useState} from 'react';
 import UserNav from './userNav';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import SettingsIcon from '@mui/icons-material/Settings';
+import {usePathname} from 'next/navigation';
 
 const drawerWidth = 240;
 
@@ -46,7 +48,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -97,6 +98,12 @@ type Props = {
 const Navigation = ({children, userImage}: Props) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
+  const pathname = usePathname()
+  let plansNavigation: any[] = [];
+
+  if (pathname.includes("/plans/")) {
+    plansNavigation = [{icon: <SettingsIcon/>, text: 'Ustawienia', path: pathname + '/settings'}]
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -106,7 +113,7 @@ const Navigation = ({children, userImage}: Props) => {
     setOpen(false);
   };
 
-  const navigation = [{icon: <CalendarMonthIcon/>, text: 'Plany', path: 'plans'}]
+  const navigation = [{icon: <CalendarMonthIcon/>, text: 'Plany', path: '/plans'}]
 
   return (
     <Box sx={{display: 'flex'}}>
@@ -140,6 +147,32 @@ const Navigation = ({children, userImage}: Props) => {
         <Divider/>
         <List>
           {navigation.map(nav => (
+            <ListItem key={nav.text} disablePadding sx={{display: 'block'}}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+                href={nav.path}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {nav.icon}
+                </ListItemIcon>
+                <ListItemText primary={nav.text} sx={{opacity: open ? 1 : 0}}/>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider/>
+        <List>
+          {plansNavigation.map(nav => (
             <ListItem key={nav.text} disablePadding sx={{display: 'block'}}>
               <ListItemButton
                 sx={{
