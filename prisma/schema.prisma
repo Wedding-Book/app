@@ -61,9 +61,9 @@ model VerificationToken {
 }
 
 model SharedPlans {
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId String
-  plan   Plan   @relation(fields: [planId], references: [id])
+  plan   Plan   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId String
 
   @@unique([userId, planId])
@@ -73,8 +73,9 @@ model Plan {
   id            String        @id @default(cuid())
   name          String?
   description   String?
+  eventDate     DateTime?
   createdAt     DateTime      @default(now())
-  owner         User          @relation(fields: [ownerId], references: [id])
+  owner         User          @relation(fields: [ownerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   ownerId       String
   collaborators SharedPlans[]
 }

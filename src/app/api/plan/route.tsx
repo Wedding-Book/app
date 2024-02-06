@@ -3,14 +3,15 @@ import {NextRequest} from 'next/server';
 
 const handler = async (req: Request) => {
   if (req.method === 'POST') {
-    const {email} = await req.json();
+    const {email, name, description, eventDate} = await req.json();
 
     const user = await prisma.user.findUnique({where: {email}})
     const newPlan = await prisma.plan.create({
       data: {
-        name: 'Testowe weselicho',
-        description: 'Ale będzie balet na tym testowym weselichu dopiero zobaczycie!!!!!!!',
-        ownerId: user.id
+        name,
+        description,
+        ownerId: user.id,
+        eventDate
       }
     })
     return new Response(
@@ -37,6 +38,15 @@ const handler = async (req: Request) => {
       headers: {"content-type": "application/json"},
       status: 200
     });
+  } else if (req.method === 'DELETE') {
+    const planId = (req as NextRequest).nextUrl.searchParams.get('planId');
+    if (!!planId) {
+      const deletedPlan = await prisma.plan.delete({where: {id: planId}});
+      return new Response(JSON.stringify(deletedPlan), {
+        headers: {"content-type": "application/json"},
+        status: 200
+      });
+    }
   } else {
     return new Response(
       JSON.stringify({error: 'Method Not Allowed'}), {
@@ -46,4 +56,4 @@ const handler = async (req: Request) => {
   }
 }
 
-export {handler as POST, handler as GET};
+export {handler as POST, handler as GET, handler as DELETE};

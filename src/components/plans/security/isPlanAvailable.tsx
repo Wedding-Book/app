@@ -11,6 +11,10 @@ export const isPlanAvailable = async (id: string, session: Session | null) => {
       },
     });
 
+  if (!plan) {
+    return false;
+  }
+
   const owner = plan.owner;
   if (owner.email === session?.user?.email) {
     return true;

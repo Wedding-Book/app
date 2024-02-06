@@ -18,13 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body style={{backgroundColor:'#F6F7F3'}}>
+    <body style={{backgroundColor: '#F6F7F3'}}>
     <AppRouterCacheProvider options={{enableCssLayer: true}}>
       <ThemeProvider theme={theme}>
-        <Providers>
-          <CssBaseline/>
-          {children}
-        </Providers>
+          <Providers>
+            <CssBaseline/>
+            {children}
+          </Providers>
       </ThemeProvider>
     </AppRouterCacheProvider>
     </body>
