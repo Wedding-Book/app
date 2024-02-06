@@ -30,3 +30,9 @@ export const getCollaboratorEmails = async (planId: string) => {
   });
   return planWithCollaborators.collaborators.map((col: any) => col.user.email)
 }
+
+export const getPlan = async (planId: string) => {
+  return await prisma.plan.findUnique({
+    where: {id: planId}
+  });
+}

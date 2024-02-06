@@ -47,6 +47,13 @@ const handler = async (req: Request) => {
         status: 200
       });
     }
+  } else if (req.method === 'PUT') {
+    const {id, name, description, eventDate} = await req.json();
+    const updated = await prisma.plan.update({where: {id}, data: {name, description, eventDate}})
+    return new Response(JSON.stringify(updated), {
+      headers: {"content-type": "application/json"},
+      status: 200
+    });
   } else {
     return new Response(
       JSON.stringify({error: 'Method Not Allowed'}), {
@@ -56,4 +63,4 @@ const handler = async (req: Request) => {
   }
 }
 
-export {handler as POST, handler as GET, handler as DELETE};
+export {handler as POST, handler as GET, handler as DELETE, handler as PUT};

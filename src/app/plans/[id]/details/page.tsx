@@ -1,13 +1,14 @@
 import {unavailablePlanRedirector} from '@/components/plans/security/unavailablePlanRedirector';
 import React from 'react';
-import DeletePlan from '@/components/plans/delete/deletePlan';
+import Details from '@/components/plans/details/details';
+import {getPlan} from '@/components/plans/prisma/plans';
 
 const PlanIdPage = async ({params}: { params: { id: string } }) => {
   await unavailablePlanRedirector(params.id);
+  const plan = await getPlan(params.id);
 
   return <>
-    <DeletePlan id={params.id}/>
-    <div>{params.id}</div>
+    <Details id={params.id} initName={plan.name} initDescription={plan.description} initEventDate={plan.eventDate}/>
   </>
 }
 

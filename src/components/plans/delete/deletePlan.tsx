@@ -13,9 +13,10 @@ const DeletePlan = ({id}: { id: string }) => {
   }
 
   return <Button
-    sx={{marginTop: '16px'}}
+    sx={{marginTop: '16px', width: '200px'}}
     variant="contained"
     color="error"
+    disableRipple
     onClick={() => deletePlan()}
   >
     Usuń wydarzenie
