@@ -60,7 +60,7 @@ const Details = ({id, initName, initDescription, initEventDate}: Props) => {
       <DateTimePicker
         sx={{marginTop: '16px', width: '50%'}}
         ampm={false}
-        format="DD/MM/YYYY HH:mm"
+        format="DD.MM.YYYY HH:mm"
         label="Data wydarzenia"
         value={eventDate}
         onChange={(newValue) => setEventDate(newValue)}

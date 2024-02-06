@@ -1,6 +1,9 @@
-const TimerPage = () => {
+import dynamic from 'next/dynamic';
 
-  return <div> timer page</div>
+const NoSSR = dynamic(() => import('@/components/plans/timer/countDownTimer'), {ssr: false})
+
+const TimerPage = () => {
+  return <NoSSR />
 }
 
 export default TimerPage;

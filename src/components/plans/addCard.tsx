@@ -81,7 +81,7 @@ const AddCard = () => {
           <DateTimePicker
             sx={{marginTop: '16px', width: '100%'}}
             ampm={false}
-            format="DD/MM/YYYY HH:mm"
+            format="DD.MM.YYYY HH:mm"
             label="Data wydarzenia"
             value={date}
             onChange={(newValue) => setDate(newValue)}
