@@ -20,6 +20,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {usePathname} from 'next/navigation';
 import ReplyIcon from '@mui/icons-material/Reply';
 import InfoIcon from '@mui/icons-material/Info';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+import {Session} from 'next-auth';
 
 const drawerWidth = 240;
 
@@ -93,10 +95,11 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 
 type Props = {
   children: any,
-  userImage?: string
+  userImage?: string,
+  session: Session | null,
 }
 
-const Navigation = ({children, userImage}: Props) => {
+const Navigation = ({session, children, userImage}: Props) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const pathname = usePathname()
@@ -115,9 +118,14 @@ const Navigation = ({children, userImage}: Props) => {
     setOpen(false);
   };
 
+  if (!session) {
+    return <>{children}</>
+  }
+
   if (pathname.includes("/plans/")) {
     plansNavigation = [
       {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
+      {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
       {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
     ];
   }

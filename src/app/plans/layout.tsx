@@ -1,4 +1,3 @@
-import serverSessionChecker from '@/components/protected/serverSessionChecker';
 import Navigation from '@/components/navigation/navigation';
 import {AuthOptions, getServerSession} from 'next-auth';
 import authOptions from '@/lib/auth/authOptions';
@@ -10,10 +9,9 @@ export default async function Home({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions as AuthOptions)
-  await serverSessionChecker({noSessionPath: '/login'});
 
   return (
-    <Navigation userImage={session?.user?.image}>
+    <Navigation session={session} userImage={session?.user?.image}>
       {children}
     </Navigation>
   );
