@@ -1,30 +1,12 @@
 'use client'
-import dayjs, {Dayjs} from 'dayjs';
-import {useEffect, useState} from 'react';
-import {usePathname} from 'next/navigation';
+import {Dayjs} from 'dayjs';
 import {useCountdown} from '@/components/plans/timer/useCountdown';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import DateTimeDisplay from '@/components/plans/timer/dateTimeDisplay';
 
-const CountDownTimer = () => {
-  const pathname = usePathname();
-  const [targetDate, setTargetDate] = useState<Dayjs>(dayjs());
+const CountDownTimer = ({targetDate}: { targetDate: Dayjs }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
-
-  useEffect(() => {
-    const match = pathname.match(/plans\/(\w+)\/timer/)
-    if (match) {
-      fetch(`/api/plan/timer?planId=${match[1]}`)
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setTargetDate(dayjs(data));
-        })
-    }
-
-  }, []);
 
   if (days + hours + minutes + seconds <= 0) {
     return (
