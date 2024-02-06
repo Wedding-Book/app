@@ -22,6 +22,7 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import InfoIcon from '@mui/icons-material/Info';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import {Session} from 'next-auth';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 const drawerWidth = 240;
 
@@ -125,6 +126,7 @@ const Navigation = ({session, children, userImage}: Props) => {
   if (pathname.includes("/plans/")) {
     plansNavigation = [
       {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
+      {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guest')},
       {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
       {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
     ];
