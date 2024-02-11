@@ -82,6 +82,7 @@ model Plan {
   config           PlanConfig?       @relation(fields: [planConfigId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planConfigId     String?           @unique
   notes            String?
+  todos            Todo[]
 }
 
 model InvitationGuest {
@@ -104,4 +105,17 @@ model PlanConfig {
   id           String  @id @default(cuid())
   giftsEnabled Boolean @default(false)
   Plan         Plan?
+}
+
+model Todo {
+  id     String  @id @default(cuid())
+  Plan   Plan   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId String
+  value  String
+  status TodoStatus @default(TODO)
+}
+
+enum TodoStatus {
+  DONE
+  TODO
 }

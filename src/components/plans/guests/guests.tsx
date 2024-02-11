@@ -32,7 +32,7 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
   const [tmpOtherGift, setTmpOtherGift] = useState<string>("");
 
   useEffect(() => {
-    setLoading(loading);
+    setLoading(true);
     setInvitationGuests(initInvitationGuests);
     setLoading(false);
   }, [initInvitationGuests]);
@@ -276,8 +276,8 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
       <Button sx={{marginTop: '12px', marginRight: '12px'}} variant="contained" onClick={() => handleAddRow()}
               color="primary">Dodaj
         wiersz</Button>
-    </Box>)
-    ;
+    </Box>
+  );
 }
 
 export default Guests;
