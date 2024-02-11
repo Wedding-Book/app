@@ -1,11 +1,11 @@
 import {unavailablePlanRedirector} from '@/components/plans/security/unavailablePlanRedirector';
 import serverSessionChecker from '@/components/protected/serverSessionChecker';
 
-const InspirationPage = async ({params}: { params: { id: string } }) => {
+const HallPage = async ({params}: { params: { id: string } }) => {
   await serverSessionChecker({noSessionPath: '/login'});
   await unavailablePlanRedirector(params.id);
 
-  return <>Inspirations TODO file storage</>
+  return <>Hall page</>
 }
 
-export default InspirationPage;
+export default HallPage;

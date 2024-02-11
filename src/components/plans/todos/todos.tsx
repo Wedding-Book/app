@@ -19,7 +19,7 @@ enum TodoStatus {
   DONE = 'DONE', TODO = 'TODO'
 }
 
-const Todos = ({initTodos, planId}: { initTodos: Todo[], planId }) => {
+const Todos = ({initTodos, planId}: { initTodos: Todo[], planId: string }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [tmpTodoValue, setTmpTodoValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
