@@ -19,14 +19,16 @@ type PlanConfig = {
 type Props = {
   id: string
   initName: string
+  initNotes?: string,
   initDescription: string,
   initEventDate: Date,
   planConfig: PlanConfig
 }
 
-const Details = ({id, initName, initDescription, initEventDate, planConfig}: Props) => {
+const Details = ({id, initName, initDescription, initNotes, initEventDate, planConfig}: Props) => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
+  const [notes, setNotes] = useState<string | undefined>();
   const [eventDate, setEventDate] = useState<Dayjs | null>();
   const [configGiftsEnabled, setConfigGiftsEnabled] = useState<boolean>(false);
 
@@ -35,16 +37,19 @@ const Details = ({id, initName, initDescription, initEventDate, planConfig}: Pro
     setDescription(initDescription);
     setEventDate(dayjs(initEventDate));
     setConfigGiftsEnabled(planConfig.giftsEnabled);
-  }, [initName, initDescription, initEventDate, planConfig]);
+    setNotes(initNotes)
+  }, [initName, initDescription, initNotes, initEventDate, planConfig]);
 
   const updatePlan = async () => {
-    const response = await fetch('/api/plan', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({id, name, description, eventDate: eventDate?.toDate()})
-    });
+    if (!!name && !!description && !!eventDate) {
+      const response = await fetch('/api/plan', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id, name, description, notes, eventDate: eventDate?.toDate()})
+      });
+    }
   }
 
   const handleGiftsEnabledChange = async () => {
@@ -66,26 +71,36 @@ const Details = ({id, initName, initDescription, initEventDate, planConfig}: Pro
 
   return <Box sx={{display: 'flex', flexDirection: 'column', marginLeft: 4, marginTop: 2}}>
     <Typography sx={{fontSize: 28, color: 'secondary.main'}}>Szczegóły wydarzenia</Typography>
-    <TextField id="planName" color="secondary" variant="outlined"
-               style={{marginTop: '16px', width: '50%'}}
-               value={name}
-               required onChange={(event) => setName(event.target.value)}
-               type="text" label="Nazwa wydarzenia"/>
-    <TextField id="planDescription" color="secondary" variant="outlined"
-               style={{marginTop: '16px', width: '50%'}}
-               value={description}
-               required onChange={(event) => setDescription(event.target.value)}
-               type="text" label="Opis wydarzenia"/>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateTimePicker
-        sx={{marginTop: '16px', width: '50%'}}
-        ampm={false}
-        format="DD.MM.YYYY HH:mm"
-        label="Data wydarzenia"
-        value={eventDate}
-        onChange={(newValue) => setEventDate(newValue)}
-      />
-    </LocalizationProvider>
+    <Box sx={{display: 'flex', flexDirection: 'row'}}>
+      <Box sx={{display: 'flex', flexDirection: 'column'}}>
+        <TextField id="planName" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={name}
+                   required onChange={(event) => setName(event.target.value)}
+                   type="text" label="Nazwa wydarzenia"/>
+        <TextField id="planDescription" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={description}
+                   multiline rows={2}
+                   required onChange={(event) => setDescription(event.target.value)}
+                   type="text" label="Opis wydarzenia"/>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateTimePicker
+            sx={{marginTop: '16px', width: '600px'}}
+            ampm={false}
+            format="DD.MM.YYYY HH:mm"
+            label="Data wydarzenia"
+            value={eventDate}
+            onChange={(newValue) => setEventDate(newValue)}
+          />
+        </LocalizationProvider>
+      </Box>
+      <TextField id="planNotes" color="secondary" variant="outlined"
+                 style={{marginTop: '16px', width: '600px', marginLeft: '32px', height: '100%'}}
+                 value={notes ?? ""} multiline rows={8}
+                 onChange={(event) => setNotes(event.target.value)}
+                 type="text" label="Notatki"/>
+    </Box>
 
     <div><Button
       sx={{marginTop: '16px', width: '250px', marginRight: 8}}

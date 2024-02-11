@@ -3,7 +3,7 @@ import {NextRequest} from 'next/server';
 
 const handler = async (req: Request) => {
   if (req.method === 'POST') {
-    const {email, name, description, eventDate} = await req.json();
+    const {email, name, description, notes, eventDate} = await req.json();
 
     const user = await prisma.user.findUnique({where: {email}})
 
@@ -52,8 +52,8 @@ const handler = async (req: Request) => {
       });
     }
   } else if (req.method === 'PUT') {
-    const {id, name, description, eventDate} = await req.json();
-    const updated = await prisma.plan.update({where: {id}, data: {name, description, eventDate}})
+    const {id, name, description, notes, eventDate} = await req.json();
+    const updated = await prisma.plan.update({where: {id}, data: {name, description, notes, eventDate}})
     return new Response(JSON.stringify(updated), {
       headers: {"content-type": "application/json"},
       status: 200

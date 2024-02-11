@@ -81,6 +81,7 @@ model Plan {
   invitationGuests InvitationGuest[]
   config           PlanConfig?       @relation(fields: [planConfigId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planConfigId     String?           @unique
+  notes            String?
 }
 
 model InvitationGuest {

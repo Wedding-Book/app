@@ -7,9 +7,6 @@ const handler = async (req: Request) => {
       giftsEnabled: boolean
     } = await req.json();
 
-    console.log(planId)
-    console.log(giftsEnabled)
-
     const plan = await prisma.plan.findUnique({where: {id: planId}});
 
     const updatedPlanConfig = await prisma.planConfig.update({where: {id: plan.planConfigId}, data: {giftsEnabled: giftsEnabled}});

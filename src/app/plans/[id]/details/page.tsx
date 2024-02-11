@@ -10,7 +10,8 @@ const PlanIdPage = async ({params}: { params: { id: string } }) => {
   const plan = await getPlan(params.id);
 
   return <>
-    <Details id={params.id} initName={plan.name} initDescription={plan.description} initEventDate={plan.eventDate} planConfig={plan.config}/>
+    <Details id={params.id} initName={plan.name} initDescription={plan.description} initNotes={plan.notes}
+             initEventDate={plan.eventDate} planConfig={plan.config}/>
   </>
 }
 

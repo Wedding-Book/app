@@ -8,7 +8,6 @@ const GuestPage = async ({params}: { params: { id: string } }) => {
   await unavailablePlanRedirector(params.id);
 
   const invitationGuests = await prisma.plan.findUnique({where: {id: params.id}, include: {invitationGuests: {include: {guests: true}}, config: true}});
-  console.log(invitationGuests.config.giftsEnabled);
 
   return <Guests initInvitationGuests={invitationGuests.invitationGuests} planId={params.id} giftsEnabled={invitationGuests.config.giftsEnabled}/>
 }
