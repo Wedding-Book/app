@@ -139,8 +139,8 @@ const Todos = ({initTodos, planId}: { initTodos: Todo[], planId }) => {
         <Box sx={{flexGrow: 1}}>
           <Typography sx={{fontSize: 24, color: 'primary.main'}}>Do zrobienia</Typography>
           {todos.map((todo, rowId) =>
-              todo.status === TodoStatus.TODO && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                      <TextField key={"todo" + todo.id + todo.value} id="planName" color="secondary" variant="outlined"
+              todo.status === TodoStatus.TODO && <Box key={"todo" + todo.id + todo.value} sx={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                      <TextField  id="planName" color="secondary" variant="outlined"
                                  style={{marginTop: '16px', width: '75%'}}
                                  size="small"
                                  onChange={(event) => onChangeValue(event.target.value)}
@@ -161,8 +161,8 @@ const Todos = ({initTodos, planId}: { initTodos: Todo[], planId }) => {
         <Box sx={{flexGrow: 1}}>
           <Typography sx={{fontSize: 24, color: 'primary.main'}}>Zrobione</Typography>
           {todos.map((todo, rowId) =>
-              todo.status === TodoStatus.DONE && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                      <TextField key={"done" + todo.id + todo.value} id="planName" color="secondary" variant="outlined"
+              todo.status === TodoStatus.DONE && <Box key={"done" + todo.id + todo.value} sx={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                      <TextField id="planName" color="secondary" variant="outlined"
                                  style={{marginTop: '16px', width: '75%'}}
                                  size="small"
                                  defaultValue={todo.value}
