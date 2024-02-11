@@ -1,5 +1,7 @@
 import prisma from '@/lib/prisma/prisma';
 import {NextRequest} from 'next/server';
+import {$Enums} from '.prisma/client';
+import TodoStatus = $Enums.TodoStatus;
 
 const handler = async (req: Request) => {
   if (req.method === 'POST') {
@@ -18,7 +20,7 @@ const handler = async (req: Request) => {
     const {todoId, value, status}: {
       todoId: string,
       value: string,
-      status: string,
+      status: TodoStatus,
     } = await req.json();
 
     const updatedTodo = await prisma.todo.update({where: {id: todoId}, data: {value, status: status}});
