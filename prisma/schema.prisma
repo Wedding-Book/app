@@ -83,6 +83,7 @@ model Plan {
   planConfigId     String?           @unique
   notes            String?
   todos            Todo[]
+  hallPropositions Hall[]
 }
 
 model InvitationGuest {
@@ -108,8 +109,8 @@ model PlanConfig {
 }
 
 model Todo {
-  id     String  @id @default(cuid())
-  Plan   Plan   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  id     String     @id @default(cuid())
+  Plan   Plan       @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId String
   value  String
   status TodoStatus @default(TODO)
@@ -118,4 +119,48 @@ model Todo {
 enum TodoStatus {
   DONE
   TODO
+}
+
+model Hall {
+  id                             String  @id @default(cuid())
+  Plan                           Plan?   @relation(fields: [planId], references: [id])
+  planId                         String?
+  isPicked                       Boolean @default(false)
+  name                           String
+  description                    String?
+  notes                          String?
+  imgUrl                         String?
+  googleUrl                      String?
+  personCost                     Int?
+  additionalCost                 Int?
+  partyTime                      String?
+  alcoholInPrice                 Boolean @default(false)
+  alcoholPrice                   Int?
+  drinksInPrice                  Boolean @default(false)
+  drinksPrice                    Int?
+  desertsInPrice                 Boolean @default(false)
+  desertsPrice                   Int?
+  menu                           String?
+  isHotel                        Boolean @default(false)
+  numberOfHotelGuests            Int?
+  hotelPricePerPerson            Int?
+  tableSettings                  String?
+  decorationInPrice              Boolean @default(false)
+  decorationPrice                Int?
+  decorationDescription          String?
+  soundSystem                    String?
+  additionalAttractions          String?
+  damagePrice                    String?
+  organizationSupport            Boolean @default(false)
+  organizationSupportDescription String?
+  availableDates                 String?
+  maxGuests                      Int?
+  fruitsInPrice                  Boolean @default(false)
+  childrenInPrice                Boolean @default(false)
+  childrenPrice                  Int?
+  extensionOfWedding             Boolean @default(false)
+  extensionOfWeddingPrice        Int?
+  advance                        Int?
+  weddingCeremony                Boolean @default(false)
+  weddingCeremonyDescription     String?
 }

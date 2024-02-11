@@ -110,8 +110,12 @@ const Navigation = ({session, children, userImage}: Props) => {
   let plansNavigation: any[] = [];
 
   const createPath = (href: string) => {
-    const regexp = /\/([^/]+)$/;
-    return pathname.replace(regexp, href);
+    const regexp = /\/plans\/\w+\b/;
+    const match = pathname.match(regexp);
+    if (match) {
+      return match[0] + href;
+    }
+    return pathname + href;
   }
 
   const handleDrawerOpen = () => {
@@ -129,7 +133,7 @@ const Navigation = ({session, children, userImage}: Props) => {
   if (pathname.includes("/plans/")) {
     plansNavigation = [
       {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
-      {icon: <FoodBankIcon/>, text: 'Sala weselna', path: createPath('/hall')},
+      {icon: <FoodBankIcon/>, text: 'Sala weselna', path: createPath('/halls')},
       {icon: <TipsAndUpdatesIcon/>, text: 'Inspiracje', path: createPath('/inspirations')},
       {icon: <FormatListBulletedIcon/>, text: 'Do zrobienia', path: createPath('/todos')},
       {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guests')},
