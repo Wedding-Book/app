@@ -126,7 +126,7 @@ const Navigation = ({session, children, userImage}: Props) => {
   if (pathname.includes("/plans/")) {
     plansNavigation = [
       {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
-      {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guest')},
+      {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guests')},
       {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
       {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
     ];

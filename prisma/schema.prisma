@@ -70,12 +70,30 @@ model SharedPlans {
 }
 
 model Plan {
-  id            String        @id @default(cuid())
-  name          String?
-  description   String?
-  eventDate     DateTime?
-  createdAt     DateTime      @default(now())
-  owner         User          @relation(fields: [ownerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  ownerId       String
-  collaborators SharedPlans[]
+  id               String             @id @default(cuid())
+  name             String?
+  description      String?
+  eventDate        DateTime?
+  createdAt        DateTime           @default(now())
+  owner            User               @relation(fields: [ownerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  ownerId          String
+  collaborators    SharedPlans[]
+  invitationGuests InvitationGuest[]
+  giftTracking     Boolean            @default(false)
+}
+
+model InvitationGuest {
+  id        String  @id @default(cuid())
+  planId    String
+  plan      Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  guests    Guest[]
+  moneyGift Int?
+  otherGift String?
+}
+
+model Guest {
+  id           String           @id @default(cuid())
+  invitationId String
+  invitation   InvitationGuest @relation(fields: [invitationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  fullName     String
 }
