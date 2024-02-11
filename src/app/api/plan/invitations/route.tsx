@@ -35,6 +35,13 @@ const handler = async (req: Request) => {
   } else if (req.method === 'DELETE') {
     const invitationId = (req as NextRequest).nextUrl.searchParams.get('id');
 
+    if (!invitationId){
+      return new Response(
+        JSON.stringify("Invitation Not Found"), {
+          headers: {"content-type": "application/json"},
+          status: 404
+        });
+    }
     await prisma.invitationGuest.delete({where: {id: invitationId}});
 
     return new Response(

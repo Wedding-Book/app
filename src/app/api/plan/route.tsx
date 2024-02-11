@@ -6,12 +6,16 @@ const handler = async (req: Request) => {
     const {email, name, description, eventDate} = await req.json();
 
     const user = await prisma.user.findUnique({where: {email}})
+
+    const createdPlanConfig = await prisma.planConfig.create({data: {}})
+
     const newPlan = await prisma.plan.create({
       data: {
         name,
         description,
         ownerId: user.id,
-        eventDate
+        eventDate,
+        planConfigId: createdPlanConfig.id
       }
     })
     return new Response(

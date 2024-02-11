@@ -70,16 +70,17 @@ model SharedPlans {
 }
 
 model Plan {
-  id               String             @id @default(cuid())
+  id               String            @id @default(cuid())
   name             String?
   description      String?
   eventDate        DateTime?
-  createdAt        DateTime           @default(now())
-  owner            User               @relation(fields: [ownerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  createdAt        DateTime          @default(now())
+  owner            User              @relation(fields: [ownerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   ownerId          String
   collaborators    SharedPlans[]
   invitationGuests InvitationGuest[]
-  giftTracking     Boolean            @default(false)
+  config           PlanConfig?       @relation(fields: [planConfigId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planConfigId     String?           @unique
 }
 
 model InvitationGuest {
@@ -92,8 +93,14 @@ model InvitationGuest {
 }
 
 model Guest {
-  id           String           @id @default(cuid())
+  id           String          @id @default(cuid())
   invitationId String
   invitation   InvitationGuest @relation(fields: [invitationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   fullName     String
+}
+
+model PlanConfig {
+  id           String  @id @default(cuid())
+  giftsEnabled Boolean @default(false)
+  Plan         Plan?
 }

@@ -30,6 +30,13 @@ const handler = async (req: Request) => {
   } else if (req.method === 'DELETE') {
     const guestId = (req as NextRequest).nextUrl.searchParams.get('id');
 
+    if (!guestId) {
+      return new Response(
+        JSON.stringify("Guest Not Found"), {
+          headers: {"content-type": "application/json"},
+          status: 404
+        });
+    }
     await prisma.guest.delete({where: {id: guestId}});
 
     return new Response(

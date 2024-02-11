@@ -9,24 +9,33 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import DeletePlan from '@/components/plans/delete/deletePlan';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+
+type PlanConfig = {
+  giftsEnabled: boolean
+}
 
 type Props = {
   id: string
   initName: string
   initDescription: string,
-  initEventDate: Date
+  initEventDate: Date,
+  planConfig: PlanConfig
 }
 
-const Details = ({id, initName, initDescription, initEventDate}: Props) => {
+const Details = ({id, initName, initDescription, initEventDate, planConfig}: Props) => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [eventDate, setEventDate] = useState<Dayjs | null>();
+  const [configGiftsEnabled, setConfigGiftsEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     setName(initName);
     setDescription(initDescription);
     setEventDate(dayjs(initEventDate));
-  }, [initName, initDescription, initEventDate]);
+    setConfigGiftsEnabled(planConfig.giftsEnabled);
+  }, [initName, initDescription, initEventDate, planConfig]);
 
   const updatePlan = async () => {
     const response = await fetch('/api/plan', {
@@ -35,6 +44,17 @@ const Details = ({id, initName, initDescription, initEventDate}: Props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({id, name, description, eventDate: eventDate?.toDate()})
+    });
+  }
+
+  const handleGiftsEnabledChange = async () => {
+    setConfigGiftsEnabled(!configGiftsEnabled);
+    await fetch('/api/plan/config', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({planId: id, giftsEnabled: !configGiftsEnabled})
     });
   }
 
@@ -78,6 +98,12 @@ const Details = ({id, initName, initDescription, initEventDate}: Props) => {
     </Button>
       <DeletePlan id={id}/>
     </div>
+
+    <Typography sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}>Konfiguracja wydarzenia</Typography>
+    <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
+                      control={<Switch checked={configGiftsEnabled}
+                                       onChange={handleGiftsEnabledChange}/>}
+                      label="Prezentownik"/>
   </Box>
 }
 

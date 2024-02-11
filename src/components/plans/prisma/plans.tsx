@@ -33,6 +33,7 @@ export const getCollaboratorEmails = async (planId: string) => {
 
 export const getPlan = async (planId: string) => {
   return await prisma.plan.findUnique({
-    where: {id: planId}
+    where: {id: planId},
+    include: {config: true}
   });
 }

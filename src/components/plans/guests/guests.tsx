@@ -24,7 +24,7 @@ type Guest = {
   fullName: string,
 }
 
-const Guests = ({initInvitationGuests, planId}: { initInvitationGuests: InvitationGuest[], planId: string }) => {
+const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGuests: InvitationGuest[], planId: string, giftsEnabled: boolean }) => {
   const [invitationGuests, setInvitationGuests] = useState<InvitationGuest[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [tmpFullName, setTmpFullName] = useState<string>("");
@@ -36,8 +36,6 @@ const Guests = ({initInvitationGuests, planId}: { initInvitationGuests: Invitati
     setInvitationGuests(initInvitationGuests);
     setLoading(false);
   }, [initInvitationGuests]);
-
-  const [giftsEnabled, setGiftsEnabled] = useState<boolean>(true);
 
   const handleAddClick = async (rid: number) => {
     await fetch('/api/plan/invitations/guests', {
@@ -190,7 +188,7 @@ const Guests = ({initInvitationGuests, planId}: { initInvitationGuests: Invitati
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({invitationId: invitationGuests[rowIndex].id, otherGift: tmpOtherGift, moneyGift: +invitationGuests[rowIndex].moneyGift})
+      body: JSON.stringify({invitationId: invitationGuests[rowIndex].id, otherGift: tmpOtherGift, moneyGift: !invitationGuests[rowIndex].moneyGift ? 0 : invitationGuests[rowIndex].moneyGift})
     }).then((res) => {
       return res.json();
     })
@@ -256,7 +254,7 @@ const Guests = ({initInvitationGuests, planId}: { initInvitationGuests: Invitati
                              size="small"
                              onChange={(event) => onChangeMoneyGift(event.target.value)}
                              onBlur={(event) => onBlurMoneyGift(rowId)}
-                             defaultValue={row.moneyGift > 0 ? row.moneyGift : ""}
+                             defaultValue={!row.moneyGift ? "" : row.moneyGift > 0 ? row.moneyGift : ""}
                              type="number" label="Prezent pieniężny"/>
               </Grid>
               <Grid item xs={1}>
