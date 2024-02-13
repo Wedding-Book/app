@@ -98,6 +98,8 @@ const Hall = (props: Props) => {
   const [weddingCeremonyPrice, setWeddingCeremonyPrice] = useState<number | undefined>();
   const [weddingCeremonyDescription, setWeddingCeremonyDescription] = useState<string | undefined>("");
   const [additionalAttractions, setAdditionalAttractions] = useState<string | undefined>("");
+  const [advance, setAdvance] = useState<number | undefined>();
+  const [isPicked, setIsPicked] = useState<boolean | undefined>();
 
   useEffect(() => {
     setLoading(true);
