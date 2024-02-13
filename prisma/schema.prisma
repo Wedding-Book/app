@@ -134,33 +134,36 @@ model Hall {
   personCost                     Int?
   additionalCost                 Int?
   partyTime                      String?
-  alcoholInPrice                 Boolean @default(false)
+  alcoholInPrice                 Boolean @default(true)
   alcoholPrice                   Int?
-  drinksInPrice                  Boolean @default(false)
+  drinksInPrice                  Boolean @default(true)
   drinksPrice                    Int?
-  desertsInPrice                 Boolean @default(false)
+  desertsInPrice                 Boolean @default(true)
   desertsPrice                   Int?
+  desertsDescription             String?
   menu                           String?
-  isHotel                        Boolean @default(false)
+  isHotel                        Boolean @default(true)
   numberOfHotelGuests            Int?
   hotelPricePerPerson            Int?
   tableSettings                  String?
-  decorationInPrice              Boolean @default(false)
-  decorationPrice                Int?
+  decorationInPrice              Boolean @default(true)
+  additionalDecorationPrice      Int?
   decorationDescription          String?
   soundSystem                    String?
   additionalAttractions          String?
   damagePrice                    String?
-  organizationSupport            Boolean @default(false)
+  organizationSupport            Boolean @default(true)
   organizationSupportDescription String?
   availableDates                 String?
   maxGuests                      Int?
-  fruitsInPrice                  Boolean @default(false)
-  childrenInPrice                Boolean @default(false)
+  fruitsInPrice                  Boolean @default(true)
+  fruitsPrice                    Int?
+  childrenInPrice                Boolean @default(true)
   childrenPrice                  Int?
-  extensionOfWedding             Boolean @default(false)
+  extensionOfWedding             Boolean @default(true)
   extensionOfWeddingPrice        Int?
   advance                        Int?
-  weddingCeremony                Boolean @default(false)
+  weddingCeremony                Boolean @default(true)
   weddingCeremonyDescription     String?
+  weddingCeremonyPrice           Int?
 }
