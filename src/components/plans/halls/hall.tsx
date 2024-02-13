@@ -474,7 +474,7 @@ const Hall = (props: Props) => {
       <Box sx={{display: 'flex', flexDirection: 'column'}}>
         {
           imgUrl && <img
-                style={{width: 400, height: 350}}
+                style={{maxWidth: 400, maxHeight: 350}}
                 src={imgUrl}
                 alt={name}
                 loading="lazy"
