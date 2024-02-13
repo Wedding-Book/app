@@ -98,8 +98,6 @@ const Hall = (props: Props) => {
   const [weddingCeremonyPrice, setWeddingCeremonyPrice] = useState<number | undefined>();
   const [weddingCeremonyDescription, setWeddingCeremonyDescription] = useState<string | undefined>("");
   const [additionalAttractions, setAdditionalAttractions] = useState<string | undefined>("");
-  const [advance, setAdvance] = useState<number | undefined>();
-  const [isPicked, setIsPicked] = useState<boolean | undefined>();
 
   useEffect(() => {
     setLoading(true);
@@ -195,7 +193,8 @@ const Hall = (props: Props) => {
         advance: advance,
         weddingCeremony: isWeddingCeremony,
         weddingCeremonyDescription: weddingCeremonyDescription,
-        weddingCeremonyPrice: weddingCeremonyPrice,})
+        weddingCeremonyPrice: weddingCeremonyPrice,
+      })
     }).then((response) => response.json());
   }
 
@@ -211,7 +210,6 @@ const Hall = (props: Props) => {
       }
     );
   }
-
 
   const deleteHall = async () => {
     await fetch(`/api/plan/halls/single?id=${props.hallId}`, {
@@ -298,6 +296,8 @@ const Hall = (props: Props) => {
                    onChange={(event) => setAvailableDates(event.target.value)}
                    type="text" label="Dostępne daty"/>
 
+        <Typography
+          sx={{fontSize: 24, color: 'secondary.main', marginTop: 4, display: 'flex', flexDirection: 'row', alignItems: 'center'}}>Goście</Typography>
         <TextField id="hallMaxGuests" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
                    value={maxGuests}
@@ -327,26 +327,7 @@ const Hall = (props: Props) => {
                    onChange={(event) => setAdditionalCost(+event.target.value)}
                    type="number" label="Dodatkowe koszty sali"/>
 
-        <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
-                          control={<Switch checked={isWeddingCeremony}
-                                           onChange={() => setIsWeddingCeremony(!isWeddingCeremony)}/>}
-                          label="Czy można zorganizować ceremonię ślubu?"/>
-        {
-          isWeddingCeremony && <TextField id="hallWeddingCeremony" color="secondary" variant="outlined"
-                                          style={{marginTop: '16px', width: '600px'}}
-                                          value={weddingCeremonyPrice}
-                                          onChange={(event) => setWeddingCeremonyPrice(+event.target.value)}
-                                          type="number" label="Cena za organizację ceremonii ślubu"/>
-        }
-        {
-          isWeddingCeremony && <TextField id="hallWeddingCeremonyDesc" color="secondary" variant="outlined"
-                                          style={{marginTop: '16px', width: '600px'}}
-                                          value={weddingCeremonyDescription ?? ""}
-                                          multiline rows={4}
-                                          onChange={(event) => setWeddingCeremonyDescription(event.target.value)}
-                                          type="text" label="Opis ceremonii ślubu"/>
-        }
-
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Czas wesela</Typography>
         <TextField id="hallPartyTime" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
                    value={partyTime ?? ""}
@@ -364,6 +345,9 @@ const Hall = (props: Props) => {
                                            onChange={(event) => setWeddingExtensionPrice(+event.target.value)}
                                            type="number" label="Cena za godzinę przedłużenia wesela"/>
         }
+
+
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Nocleg</Typography>
 
         <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
                           control={<Switch checked={isHotel}
@@ -386,6 +370,7 @@ const Hall = (props: Props) => {
 
       </Box>
       <Box sx={{display: 'flex', flexDirection: 'column', marginRight: 8}}>
+        <Typography sx={{fontSize: 24, color: 'secondary.main'}}>Jedzenie i napoje</Typography>
         <TextField id="hallMenu" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
                    value={menu ?? ""}
@@ -447,6 +432,7 @@ const Hall = (props: Props) => {
                                        type="number" label="Cena owoców"/>
         }
 
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Dekoracje</Typography>
         <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
                           control={<Switch checked={isDecorationInPrice}
                                            onChange={() => setIsDecorationInPrice(!isDecorationInPrice)}/>}
@@ -465,6 +451,15 @@ const Hall = (props: Props) => {
                    onChange={(event) => setAdditionalDecorationPrice(+event.target.value)}
                    type="number" label="Cena dodatkowych dekoracji sali"/>
 
+        <TextField id="hallTableSettings" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={tableSettings ?? ""}
+                   multiline rows={2}
+                   onChange={(event) => setTableSettings(event.target.value)}
+                   type="text" label="Opis układu stołów"/>
+
+
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Płatności</Typography>
         <TextField id="hallAdvance" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
                    value={advance}
@@ -496,12 +491,29 @@ const Hall = (props: Props) => {
                    value={googleMapsUrl ?? ""}
                    onChange={(event) => setGoogleMapsUrl(event.target.value)}
                    type="text" label="Link do Map Google"/>
-        <TextField id="hallTableSettings" color="secondary" variant="outlined"
-                   style={{marginTop: '16px', width: '600px'}}
-                   value={tableSettings ?? ""}
-                   multiline rows={2}
-                   onChange={(event) => setTableSettings(event.target.value)}
-                   type="text" label="Opis układu stołów"/>
+
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Ceremonia ślubu</Typography>
+        <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
+                          control={<Switch checked={isWeddingCeremony}
+                                           onChange={() => setIsWeddingCeremony(!isWeddingCeremony)}/>}
+                          label="Czy można zorganizować ceremonię ślubu?"/>
+        {
+          isWeddingCeremony && <TextField id="hallWeddingCeremony" color="secondary" variant="outlined"
+                                          style={{marginTop: '16px', width: '600px'}}
+                                          value={weddingCeremonyPrice}
+                                          onChange={(event) => setWeddingCeremonyPrice(+event.target.value)}
+                                          type="number" label="Cena za organizację ceremonii ślubu"/>
+        }
+        {
+          isWeddingCeremony && <TextField id="hallWeddingCeremonyDesc" color="secondary" variant="outlined"
+                                          style={{marginTop: '16px', width: '600px'}}
+                                          value={weddingCeremonyDescription ?? ""}
+                                          multiline rows={4}
+                                          onChange={(event) => setWeddingCeremonyDescription(event.target.value)}
+                                          type="text" label="Opis ceremonii ślubu"/>
+        }
+
+        <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Pozostałe</Typography>
         <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
                           control={<Switch checked={isOrganizationSupport}
                                            onChange={() => setIsOrganizationSupport(!isOrganizationSupport)}/>}
@@ -547,8 +559,7 @@ const Hall = (props: Props) => {
     >
       Zapisz
     </Button>
-  </Box>)
-    ;
+  </Box>);
 }
 
 export default Hall;
