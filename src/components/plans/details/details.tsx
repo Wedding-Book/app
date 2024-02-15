@@ -23,11 +23,19 @@ type Props = {
   initDescription: string,
   initEventDate: Date,
   planConfig: PlanConfig
+  initGroom?: string,
+  initBright?: string,
+  initBestMan?: string,
+  initBridesMaid?: string,
 }
 
-const Details = ({id, initName, initDescription, initNotes, initEventDate, planConfig}: Props) => {
+const Details = ({id, initName, initDescription, initNotes, initEventDate, planConfig, initGroom, initBright, initBridesMaid, initBestMan}: Props) => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
+  const [groom, setGroom] = useState<string>();
+  const [bright, setBright] = useState<string>();
+  const [bestMan, setBestMan] = useState<string>();
+  const [bridesMaid, setBridesMaid] = useState<string>();
   const [notes, setNotes] = useState<string | undefined>();
   const [eventDate, setEventDate] = useState<Dayjs | null>();
   const [configGiftsEnabled, setConfigGiftsEnabled] = useState<boolean>(false);
@@ -35,6 +43,10 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
   useEffect(() => {
     setName(initName);
     setDescription(initDescription);
+    setGroom(initGroom);
+    setBright(initBright);
+    setBestMan(initBestMan);
+    setBridesMaid(initBridesMaid);
     setEventDate(dayjs(initEventDate));
     setConfigGiftsEnabled(planConfig.giftsEnabled);
     setNotes(initNotes)
@@ -47,7 +59,7 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({id, name, description, notes, eventDate: eventDate?.toDate()})
+        body: JSON.stringify({id, name, description, notes, eventDate: eventDate?.toDate(), bright, groom, bestMan, bridesMaid})
       });
     }
   }
@@ -94,6 +106,26 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
             onChange={(newValue) => setEventDate(newValue)}
           />
         </LocalizationProvider>
+        <TextField id="planName" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={bright}
+                   onChange={(event) => setBright(event.target.value)}
+                   type="text" label="Panna młoda"/>
+        <TextField id="planName" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={groom}
+                   onChange={(event) => setGroom(event.target.value)}
+                   type="text" label="Pan młody"/>
+        <TextField id="planName" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={bridesMaid}
+                   onChange={(event) => setBridesMaid(event.target.value)}
+                   type="text" label="Świadkowa"/>
+        <TextField id="planName" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={bestMan}
+                   onChange={(event) => setBestMan(event.target.value)}
+                   type="text" label="Świadek"/>
       </Box>
       <TextField id="planNotes" color="secondary" variant="outlined"
                  style={{marginTop: '16px', width: '600px', marginLeft: '32px', height: '100%'}}

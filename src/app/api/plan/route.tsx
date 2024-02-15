@@ -52,8 +52,8 @@ const handler = async (req: Request) => {
       });
     }
   } else if (req.method === 'PUT') {
-    const {id, name, description, notes, eventDate} = await req.json();
-    const updated = await prisma.plan.update({where: {id}, data: {name, description, notes, eventDate}})
+    const {id, name, description, notes, eventDate, groom, bright, bridesMaid, bestMan} = await req.json();
+    const updated = await prisma.plan.update({where: {id}, data: {name, description, notes, eventDate, groom, bright, bridesMaid, bestMan}})
     return new Response(JSON.stringify(updated), {
       headers: {"content-type": "application/json"},
       status: 200

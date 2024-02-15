@@ -27,6 +27,8 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import LuggageIcon from '@mui/icons-material/Luggage';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 
 const drawerWidth = 240;
 
@@ -139,6 +141,8 @@ const Navigation = ({session, children, userImage}: Props) => {
       {icon: <OtherHousesIcon/>, text: 'Pozostałe szczegóły', path: createPath('/other')},
       {icon: <FormatListBulletedIcon/>, text: 'Do zrobienia', path: createPath('/todos')},
       {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guests')},
+      {icon: <CardGiftcardIcon/>, text: 'Prezenty dla gości', path: createPath('/gifts')},
+      {icon: <LuggageIcon/>, text: 'Podróż poślubna', path: createPath('/trips')},
       {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
       {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
     ];

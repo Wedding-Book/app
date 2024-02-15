@@ -71,6 +71,10 @@ model SharedPlans {
 
 model Plan {
   id               String            @id @default(cuid())
+  groom            String?
+  bright           String?
+  bestMan          String?
+  bridesMaid       String?
   name             String?
   description      String?
   eventDate        DateTime?
