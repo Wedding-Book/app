@@ -84,6 +84,7 @@ model Plan {
   notes            String?
   todos            Todo[]
   hallPropositions Hall[]
+  inspirations     Inspiration[]
 }
 
 model InvitationGuest {
@@ -166,4 +167,11 @@ model Hall {
   weddingCeremony                Boolean @default(true)
   weddingCeremonyDescription     String?
   weddingCeremonyPrice           Int?
+}
+
+model Inspiration {
+  id     String  @id @default(cuid())
+  url    String
+  Plan   Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId String?
 }

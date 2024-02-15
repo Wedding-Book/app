@@ -26,7 +26,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
-import CakeIcon from '@mui/icons-material/Cake';
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 
 const drawerWidth = 240;
 
@@ -136,7 +136,7 @@ const Navigation = ({session, children, userImage}: Props) => {
       {icon: <InfoIcon/>, text: 'Szczegóły', path: createPath('/details')},
       {icon: <FoodBankIcon/>, text: 'Sala weselna', path: createPath('/halls')},
       {icon: <TipsAndUpdatesIcon/>, text: 'Inspiracje', path: createPath('/inspirations')},
-      {icon: <CakeIcon/>, text: 'Pozostałe szczegóły', path: createPath('/other')},
+      {icon: <OtherHousesIcon/>, text: 'Pozostałe szczegóły', path: createPath('/other')},
       {icon: <FormatListBulletedIcon/>, text: 'Do zrobienia', path: createPath('/todos')},
       {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guests')},
       {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
