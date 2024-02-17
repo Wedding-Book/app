@@ -89,6 +89,7 @@ model Plan {
   todos            Todo[]
   hallPropositions Hall[]
   inspirations     Inspiration[]
+  trips            Trip[]
 }
 
 model InvitationGuest {
@@ -178,4 +179,15 @@ model Inspiration {
   url    String
   Plan   Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId String?
+}
+
+model Trip {
+  id       String  @id @default(cuid())
+  imgUrl   String
+  offerUrl String?
+  name     String
+  price    Int?
+  isPicked Boolean @default(false)
+  Plan     Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId   String?
 }
