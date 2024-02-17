@@ -90,6 +90,8 @@ model Plan {
   hallPropositions Hall[]
   inspirations     Inspiration[]
   trips            Trip[]
+  parentGift       ParentGift?
+  guestGift        GuestGift?
 }
 
 model InvitationGuest {
@@ -190,4 +192,27 @@ model Trip {
   isPicked Boolean @default(false)
   Plan     Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId   String?
+}
+
+model ParentGift {
+  id          String  @id @default(cuid())
+  imgUrl      String?
+  offerUrl    String?
+  name        String
+  description String
+  quantity    Int     @default(4)
+  price       Int
+  plan        Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId      String  @unique
+}
+
+model GuestGift {
+  id          String  @id @default(cuid())
+  imgUrl      String?
+  offerUrl    String?
+  name        String
+  description String
+  price       Int
+  plan        Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId      String  @unique
 }

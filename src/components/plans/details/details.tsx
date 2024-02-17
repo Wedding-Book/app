@@ -150,7 +150,7 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
     <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
                       control={<Switch checked={configGiftsEnabled}
                                        onChange={handleGiftsEnabledChange}/>}
-                      label="Prezentownik"/>
+                      label="Prezentownik na liście gości"/>
   </Box>
 }
 
