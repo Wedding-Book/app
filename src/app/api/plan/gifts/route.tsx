@@ -6,8 +6,8 @@ const handler = async (req: Request) => {
       planId: string,
       name: string,
       description: string,
-      price?: number,
-      quantity?: number,
+      price: number,
+      quantity: number,
       imgUrl: string,
       offerUrl?: string,
       isParent: boolean
