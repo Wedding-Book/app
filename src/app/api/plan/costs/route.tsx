@@ -33,7 +33,7 @@ const handler = async (req: Request) => {
     plan.invitationGuests.forEach((inv: any) => numberOfGuests += inv.guests.length)
     result.push({name: "Prezenty dla gości", price: (plan.guestGift.price ?? 0) , quantity: numberOfGuests})
     result.push({name: "Prezenty dla rodziców", price: (plan.parentGift.price ?? 0), quantity: plan.parentGift.quantity})
-    const pickedHall = plan.hallPropositions.filter(hall => hall.isPicked);
+    const pickedHall = plan.hallPropositions.filter((hall: any) => hall.isPicked);
     if (!!pickedHall) {
       result.push({name: "Podstawowa cena sali", price: pickedHall.basePrice ?? 0, quantity: 1});
       result.push({name: "Cena gości", price: pickedHall.personCost ?? 0, quantity: numberOfGuests});
@@ -47,7 +47,7 @@ const handler = async (req: Request) => {
       result.push({name: "Cena za desery", price: pickedHall.desertsPrice ?? 0, quantity: 1});
       result.push({name: "Cena za owoce", price: pickedHall.fruitsPrice ?? 0, quantity: 1});
     }
-    const pickedTrip = plan.trips.filter(trip => trip.isPicked);
+    const pickedTrip = plan.trips.filter((trip: any) => trip.isPicked);
     if (!!pickedTrip) {
       result.push({name: "Podróż", price: pickedTrip.price ?? 0, quantity: 1});
     }
