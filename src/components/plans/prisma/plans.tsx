@@ -37,3 +37,10 @@ export const getPlan = async (planId: string) => {
     include: {config: true}
   });
 }
+
+export const getAdditionalCosts = async (planId: string) => {
+  return await prisma.plan.findUnique({
+    where: {id: planId},
+    include: {config: true}
+  });
+}

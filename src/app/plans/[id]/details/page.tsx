@@ -11,6 +11,7 @@ const PlanIdPage = async ({params}: { params: { id: string } }) => {
 
   return <>
     <Details id={params.id} initName={plan.name} initDescription={plan.description} initNotes={plan.notes}
+             initBestMan={plan.bestMan} initBridesMaid={plan.bridesMaid} initGroom={plan.groom} initBright={plan.bright}
              initEventDate={plan.eventDate} planConfig={plan.config}/>
   </>
 }

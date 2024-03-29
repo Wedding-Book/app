@@ -22,6 +22,7 @@ type Props = {
   initMenu?: string,
   initTableSettings?: string,
   initPersonCost?: number,
+  initBasePrice?: number,
   initAdditionalCost?: number,
   initAlcoholInPrice?: boolean,
   initAlcoholPrice?: number,
@@ -69,6 +70,7 @@ const Hall = (props: Props) => {
   const [tableSettings, setTableSettings] = useState<string | undefined>("");
   const [personCost, setPersonCost] = useState<number | undefined>();
   const [additionalCost, setAdditionalCost] = useState<number | undefined>();
+  const [basePrice, setBasePrice] = useState<number | undefined>();
   const [alcoholInPrice, setAlcoholInPrice] = useState<boolean | undefined>();
   const [alcoholPrice, setAlcoholPrice] = useState<number | undefined>();
   const [drinksInPrice, setDrinksInPrice] = useState<boolean | undefined>();
@@ -112,6 +114,7 @@ const Hall = (props: Props) => {
     setMenu(props.initMenu ?? "");
     setTableSettings(props.initTableSettings ?? "");
     setPersonCost(props.initPersonCost);
+    setBasePrice(props.initBasePrice);
     setAdditionalCost(props.initAdditionalCost);
     setAlcoholInPrice(props.initAlcoholInPrice);
     setAlcoholPrice(props.initAlcoholPrice);
@@ -163,6 +166,7 @@ const Hall = (props: Props) => {
         googleUrl: googleMapsUrl,
         personCost: personCost,
         additionalCost: additionalCost,
+        basePrice: basePrice,
         partyTime: partyTime,
         alcoholInPrice: alcoholInPrice,
         alcoholPrice: alcoholPrice,
@@ -322,6 +326,12 @@ const Hall = (props: Props) => {
                                           onChange={(event) => setChildPrice(+event.target.value)}
                                           type="number" label="Opłata za dziecko"/>
         }
+
+        <TextField id="hallBasePrice" color="secondary" variant="outlined"
+                   style={{marginTop: '16px', width: '600px'}}
+                   value={basePrice}
+                   onChange={(event) => setBasePrice(+event.target.value)}
+                   type="number" label="Podstawowa cena sali"/>
 
         <TextField id="hallAdditionalCost" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}

@@ -233,7 +233,7 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
                          onBlur={(event) => onBlurFullName(rowId, columnId)}
                          defaultValue={column.fullName}
                          required
-                         type="text" label="Nazwa wydarzenia"/>
+                         type="text" label="Gość"/>
               {row.guests.length > 1 &&
                   <Grid item xs="auto">
                       <IconButton aria-label="delete" onClick={() => handleColumnDeleteClick(rowId, columnId)}

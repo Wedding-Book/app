@@ -89,6 +89,7 @@ model Plan {
   todos            Todo[]
   hallPropositions Hall[]
   inspirations     Inspiration[]
+  additionalCosts  AdditionalCost[]
   trips            Trip[]
   parentGift       ParentGift?
   guestGift        GuestGift?
@@ -139,6 +140,7 @@ model Hall {
   notes                          String?
   imgUrl                         String?
   googleUrl                      String?
+  basePrice                      Int?
   personCost                     Int?
   additionalCost                 Int?
   partyTime                      String?
@@ -215,4 +217,13 @@ model GuestGift {
   price       Int
   plan        Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId      String  @unique
+}
+
+model AdditionalCost {
+  id       String  @id @default(cuid())
+  name     String
+  price    Int
+  quantity Int     @default(1)
+  Plan     Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId   String?
 }

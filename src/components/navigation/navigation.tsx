@@ -29,6 +29,7 @@ import FoodBankIcon from '@mui/icons-material/FoodBank';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const drawerWidth = 240;
 
@@ -143,6 +144,7 @@ const Navigation = ({session, children, userImage}: Props) => {
       {icon: <PeopleAltIcon/>, text: 'Goście', path: createPath('/guests')},
       {icon: <CardGiftcardIcon/>, text: 'Prezenty dla gości', path: createPath('/gifts')},
       {icon: <LuggageIcon/>, text: 'Podróż poślubna', path: createPath('/trips')},
+      {icon: <AttachMoneyIcon/>, text: 'Kosztorys', path: createPath('/costs')},
       {icon: <AlarmOnIcon/>, text: 'Licznik czasu', path: createPath('/timer')},
       {icon: <ReplyIcon/>, text: 'Udostępnij', path: createPath('/share')}
     ];
