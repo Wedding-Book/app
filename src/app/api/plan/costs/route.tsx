@@ -24,7 +24,8 @@ const handler = async (req: Request) => {
         additionalCosts: true,
         trips: true,
         parentGift: true,
-        guestGift: true
+        guestGift: true,
+        other: true
       }
     });
 
@@ -46,6 +47,21 @@ const handler = async (req: Request) => {
       result.push({name: "Cena za napoje", price: pickedHall.drinksPrice ?? 0, quantity: 1});
       result.push({name: "Cena za desery", price: pickedHall.desertsPrice ?? 0, quantity: 1});
       result.push({name: "Cena za owoce", price: pickedHall.fruitsPrice ?? 0, quantity: 1});
+    }
+    if (!!plan.other) {
+      result.push({name: "Kwiaty", price: plan.other.flowersPrice ?? 0, quantity: 1});
+      result.push({name: "Fotograf", price: plan.other.photographerPrice ?? 0, quantity: 1});
+      result.push({name: "Kamerzysta", price: plan.other.cameramanPrice ?? 0, quantity: 1});
+      result.push({name: "Muzyka", price: plan.other.musicPrice ?? 0, quantity: 1});
+      result.push({name: "Słodkości", price: plan.other.confectioneryPrice ?? 0, quantity: 1});
+      result.push({name: "Alkohol", price: plan.other.alcoholPrice ?? 0, quantity: 1});
+      result.push({name: "Napoje", price: plan.other.drinksPrice ?? 0, quantity: 1});
+      result.push({name: "Ceremonia", price: plan.other.ceremonyPrice ?? 0, quantity: 1});
+      result.push({name: "Suknia ślubna", price: plan.other.brightsDressPrice ?? 0, quantity: 1});
+      result.push({name: "Garnitur", price: plan.other.groomsSuitPrice ?? 0, quantity: 1});
+      result.push({name: "Fryzjer", price: plan.other.hairPrice ?? 0, quantity: 1});
+      result.push({name: "Kosmetyczka", price: plan.other.beauticianPrice ?? 0, quantity: 1});
+      result.push({name: "Samochód", price: plan.other.carPrice ?? 0, quantity: 1});
     }
     const pickedTrip = plan.trips.filter((trip: any) => trip.isPicked);
     if (!!pickedTrip) {
