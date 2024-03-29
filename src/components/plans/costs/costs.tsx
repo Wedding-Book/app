@@ -163,7 +163,7 @@ const Costs = ({planId}: CostsProps) => {
           ...prevState.slice(0, rowIndex),
           {
             ...prevState[rowIndex],
-            quantity: tmpQuantity
+            quantity: costs[rowIndex].quantity
           },
           ...prevState.slice(rowIndex + 1)
         ]
