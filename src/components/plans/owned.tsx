@@ -13,7 +13,7 @@ const Owned = ({plans}: Props) => {
     <Typography sx={{fontSize: 28, color: 'secondary.main', marginLeft: 4, marginTop: 2}}>Twoje planowane
       śluby</Typography>
     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
-      {plans.map(plan => <PlanCard key={plan.id} id={plan.id} name={plan.name} description={plan.description}/>)}
+      {plans?.map(plan => <PlanCard key={plan.id} id={plan.id} name={plan.name} description={plan.description}/>)}
 
       <AddCard/>
     </div>

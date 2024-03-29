@@ -149,9 +149,6 @@ const Other = ({
 
   useEffect(() => {
     setLoading(true);
-    console.log(otherId)
-    console.log(!!otherId)
-    console.log(initFlowersUrl)
     if (!!otherId) {
       setFlowersUrl(initFlowersUrl)
       setFlowersPrice(initFlowersPrice)

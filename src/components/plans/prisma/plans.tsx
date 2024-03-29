@@ -8,7 +8,7 @@ export const plans = async (session: Session | null) => {
       plans: true,
     },
   });
-  return userWithPlans.plans;
+  return userWithPlans?.plans;
 }
 
 export const sharedPlans = async (session: Session | null) => {
@@ -18,7 +18,7 @@ export const sharedPlans = async (session: Session | null) => {
       sharedPlans: { include: { plan: true }},
     },
   });
-  return userSharedPlans.sharedPlans;
+  return userSharedPlans?.sharedPlans;
 }
 
 export const getCollaboratorEmails = async (planId: string) => {

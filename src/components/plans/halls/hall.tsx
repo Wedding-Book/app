@@ -279,25 +279,25 @@ const Hall = (props: Props) => {
       <Box sx={{display: 'flex', flexDirection: 'column', marginRight: 8}}>
         <TextField id="hallName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={name ?? ""}
+                   defaultValue={name ?? ""}
                    required onChange={(event) => setName(event.target.value)}
                    type="text" label="Nazwa sali"/>
         <TextField id="hallDescription" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={description ?? ""}
+                   defaultValue={description ?? ""}
                    multiline rows={2}
                    onChange={(event) => setDescription(event.target.value)}
                    type="text" label="Opis sali"/>
         <TextField id="hallNotes" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={notes ?? ""}
+                   defaultValue={notes ?? ""}
                    multiline rows={2}
                    onChange={(event) => setNotes(event.target.value)}
                    type="text" label="Notatki na temat sali"/>
 
         <TextField id="hallAvailableDates" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={availableDates ?? ""}
+                   defaultValue={availableDates ?? ""}
                    multiline rows={4}
                    onChange={(event) => setAvailableDates(event.target.value)}
                    type="text" label="Dostępne daty"/>
@@ -306,13 +306,13 @@ const Hall = (props: Props) => {
           sx={{fontSize: 24, color: 'secondary.main', marginTop: 4, display: 'flex', flexDirection: 'row', alignItems: 'center'}}>Goście</Typography>
         <TextField id="hallMaxGuests" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={maxGuests}
+                   defaultValue={maxGuests}
                    onChange={(event) => setMaxGuests(+event.target.value)}
                    type="number" label="Maksymalna liczba gości"/>
         <TextField id="hallPersonPrice" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
                    onChange={(event) => setPersonCost(+event.target.value)}
-                   value={personCost}
+                   defaultValue={personCost}
                    type="number" label="Koszt za tależyk"/>
 
         <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
@@ -322,27 +322,27 @@ const Hall = (props: Props) => {
         {
           isChildrenInPrice && <TextField id="hallChild" color="secondary" variant="outlined"
                                           style={{marginTop: '16px', width: '600px'}}
-                                          value={childPrice}
+                                          defaultValue={childPrice}
                                           onChange={(event) => setChildPrice(+event.target.value)}
                                           type="number" label="Opłata za dziecko"/>
         }
 
         <TextField id="hallBasePrice" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={basePrice}
+                   defaultValue={basePrice}
                    onChange={(event) => setBasePrice(+event.target.value)}
                    type="number" label="Podstawowa cena sali"/>
 
         <TextField id="hallAdditionalCost" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={additionalCost}
+                   defaultValue={additionalCost}
                    onChange={(event) => setAdditionalCost(+event.target.value)}
                    type="number" label="Dodatkowe koszty sali"/>
 
         <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Czas wesela</Typography>
         <TextField id="hallPartyTime" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={partyTime ?? ""}
+                   defaultValue={partyTime ?? ""}
                    onChange={(event) => setPartyTime(event.target.value)}
                    type="text" label="Dozwolony czas wesela"/>
 
@@ -353,7 +353,7 @@ const Hall = (props: Props) => {
         {
           isWeddingExtension && <TextField id="hallExtension" color="secondary" variant="outlined"
                                            style={{marginTop: '16px', width: '600px'}}
-                                           value={weddingExtensionPrice}
+                                           defaultValue={weddingExtensionPrice}
                                            onChange={(event) => setWeddingExtensionPrice(+event.target.value)}
                                            type="number" label="Cena za godzinę przedłużenia wesela"/>
         }
@@ -368,14 +368,14 @@ const Hall = (props: Props) => {
         {
           isHotel && <TextField id="hallHotelPrice" color="secondary" variant="outlined"
                                 style={{marginTop: '16px', width: '600px'}}
-                                value={hotelPrice}
+                                defaultValue={hotelPrice}
                                 onChange={(event) => setHotelPrice(+event.target.value)}
                                 type="number" label="Cena hotelu za osobę/pokój"/>
         }
         {
           isHotel && <TextField id="hallHotelGuests" color="secondary" variant="outlined"
                                 style={{marginTop: '16px', width: '600px'}}
-                                value={hotelGuests}
+                                defaultValue={hotelGuests}
                                 onChange={(event) => setHotelGuests(+event.target.value)}
                                 type="number" label="Liczba gości hotelowych"/>
         }
@@ -385,7 +385,7 @@ const Hall = (props: Props) => {
         <Typography sx={{fontSize: 24, color: 'secondary.main'}}>Jedzenie i napoje</Typography>
         <TextField id="hallMenu" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={menu ?? ""}
+                   defaultValue={menu ?? ""}
                    multiline rows={4}
                    onChange={(event) => setMenu(event.target.value)}
                    type="text" label="Menu"/>
@@ -397,7 +397,7 @@ const Hall = (props: Props) => {
         {
           !alcoholInPrice && <TextField id="hallAlcoholPrice" color="secondary" variant="outlined"
                                         style={{marginTop: '16px', width: '600px'}}
-                                        value={alcoholPrice}
+                                        defaultValue={alcoholPrice}
                                         onChange={(event) => setAlcoholPrice(+event.target.value)}
                                         type="number" label="Cena alkoholu"/>
         }
@@ -409,7 +409,7 @@ const Hall = (props: Props) => {
         {
           !drinksInPrice && <TextField id="hallDrinksPrice" color="secondary" variant="outlined"
                                        style={{marginTop: '16px', width: '600px'}}
-                                       value={drinksPrice}
+                                       defaultValue={drinksPrice}
                                        onChange={(event) => setDrinksPrice(+event.target.value)}
                                        type="number" label="Cena napoi"/>
         }
@@ -421,13 +421,13 @@ const Hall = (props: Props) => {
         {
           !desertsInPrice && <TextField id="hallDesertsPrice" color="secondary" variant="outlined"
                                         style={{marginTop: '16px', width: '600px'}}
-                                        value={desertsPrice}
+                                        defaultValue={desertsPrice}
                                         onChange={(event) => setDesertsPrice(+event.target.value)}
                                         type="number" label="Cena deserów"/>
         }
         <TextField id="hallDesertsDescription" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={desertsDescription ?? ""}
+                   defaultValue={desertsDescription ?? ""}
                    multiline rows={4}
                    onChange={(event) => setDesertsDescription(event.target.value)}
                    type="text" label="Opis deserów"/>
@@ -439,7 +439,7 @@ const Hall = (props: Props) => {
         {
           !fruitsInPrice && <TextField id="hallDesertsPrice" color="secondary" variant="outlined"
                                        style={{marginTop: '16px', width: '600px'}}
-                                       value={fruitsPrice}
+                                       defaultValue={fruitsPrice}
                                        onChange={(event) => setFruitsPrice(+event.target.value)}
                                        type="number" label="Cena owoców"/>
         }
@@ -452,20 +452,20 @@ const Hall = (props: Props) => {
         {
           isDecorationInPrice && <TextField id="hallDecorationDescription" color="secondary" variant="outlined"
                                             style={{marginTop: '16px', width: '600px'}}
-                                            value={decorationDescription ?? ""}
+                                            defaultValue={decorationDescription ?? ""}
                                             multiline rows={2}
                                             onChange={(event) => setDecorationDescription(event.target.value)}
                                             type="text" label="Opis dekoracji"/>
         }
         <TextField id="hallAdditionalDecorationPrice" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={additionalDecorationPrice}
+                   defaultValue={additionalDecorationPrice}
                    onChange={(event) => setAdditionalDecorationPrice(+event.target.value)}
                    type="number" label="Cena dodatkowych dekoracji sali"/>
 
         <TextField id="hallTableSettings" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={tableSettings ?? ""}
+                   defaultValue={tableSettings ?? ""}
                    multiline rows={2}
                    onChange={(event) => setTableSettings(event.target.value)}
                    type="text" label="Opis układu stołów"/>
@@ -474,7 +474,7 @@ const Hall = (props: Props) => {
         <Typography sx={{fontSize: 24, color: 'secondary.main', marginTop: 4}}>Płatności</Typography>
         <TextField id="hallAdvance" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={advance}
+                   defaultValue={advance}
                    onChange={(event) => setAdvance(+event.target.value)}
                    type="number" label="Przedpłata"/>
       </Box>
@@ -495,12 +495,12 @@ const Hall = (props: Props) => {
         }
         <TextField id="hallImageUrl" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={imgUrl ?? ""}
+                   defaultValue={imgUrl ?? ""}
                    onChange={(event) => setImgUrl(event.target.value)}
                    type="text" label="Link do zdjęcia sali"/>
         <TextField id="hallGoogleurl" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={googleMapsUrl ?? ""}
+                   defaultValue={googleMapsUrl ?? ""}
                    onChange={(event) => setGoogleMapsUrl(event.target.value)}
                    type="text" label="Link do Map Google"/>
 
@@ -512,14 +512,14 @@ const Hall = (props: Props) => {
         {
           isWeddingCeremony && <TextField id="hallWeddingCeremony" color="secondary" variant="outlined"
                                           style={{marginTop: '16px', width: '600px'}}
-                                          value={weddingCeremonyPrice}
+                                          defaultValue={weddingCeremonyPrice}
                                           onChange={(event) => setWeddingCeremonyPrice(+event.target.value)}
                                           type="number" label="Cena za organizację ceremonii ślubu"/>
         }
         {
           isWeddingCeremony && <TextField id="hallWeddingCeremonyDesc" color="secondary" variant="outlined"
                                           style={{marginTop: '16px', width: '600px'}}
-                                          value={weddingCeremonyDescription ?? ""}
+                                          defaultValue={weddingCeremonyDescription ?? ""}
                                           multiline rows={4}
                                           onChange={(event) => setWeddingCeremonyDescription(event.target.value)}
                                           type="text" label="Opis ceremonii ślubu"/>
@@ -533,7 +533,7 @@ const Hall = (props: Props) => {
         {
           isOrganizationSupport && <TextField id="hallOrganizationSupport" color="secondary" variant="outlined"
                                               style={{marginTop: '16px', width: '600px'}}
-                                              value={organizationSupportDescription ?? ""}
+                                              defaultValue={organizationSupportDescription ?? ""}
                                               multiline rows={2}
                                               onChange={(event) => setOrganizationSupportDescription(event.target.value)}
                                               type="text" label="Opis wsparcia w organizacji"/>
@@ -541,21 +541,21 @@ const Hall = (props: Props) => {
 
         <TextField id="hallSoundsystemDescription" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={soundSystemDescription ?? ""}
+                   defaultValue={soundSystemDescription ?? ""}
                    multiline rows={2}
                    onChange={(event) => setSoundSystemDescription(event.target.value)}
                    type="text" label="Opis nagłośnienia sali"/>
 
         <TextField id="hallAdditionalAttraction" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={additionalAttractions ?? ""}
+                   defaultValue={additionalAttractions ?? ""}
                    multiline rows={2}
                    onChange={(event) => setAdditionalAttractions(event.target.value)}
                    type="text" label="Opis dodatkowych atrkacji"/>
 
         <TextField id="hallDamagePriceAgreement" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={damagePriceAgreement ?? ""}
+                   defaultValue={damagePriceAgreement ?? ""}
                    multiline rows={2}
                    onChange={(event) => setDamagePriceAgreement(event.target.value)}
                    type="text" label="Opis kosztów zniszczeń podczas wesela"/>

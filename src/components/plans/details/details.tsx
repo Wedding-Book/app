@@ -87,12 +87,12 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
       <Box sx={{display: 'flex', flexDirection: 'column'}}>
         <TextField id="planName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={name}
+                   defaultValue={name}
                    required onChange={(event) => setName(event.target.value)}
                    type="text" label="Nazwa wydarzenia"/>
         <TextField id="planDescription" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={description}
+                   defaultValue={description}
                    multiline rows={2}
                    required onChange={(event) => setDescription(event.target.value)}
                    type="text" label="Opis wydarzenia"/>
@@ -102,34 +102,34 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
             ampm={false}
             format="DD.MM.YYYY HH:mm"
             label="Data wydarzenia"
-            value={eventDate}
+            defaultValue={eventDate}
             onChange={(newValue) => setEventDate(newValue)}
           />
         </LocalizationProvider>
         <TextField id="planName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={bright}
+                   defaultValue={bright}
                    onChange={(event) => setBright(event.target.value)}
                    type="text" label="Panna młoda"/>
         <TextField id="planName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={groom}
+                   defaultValue={groom}
                    onChange={(event) => setGroom(event.target.value)}
                    type="text" label="Pan młody"/>
         <TextField id="planName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={bridesMaid}
+                   defaultValue={bridesMaid}
                    onChange={(event) => setBridesMaid(event.target.value)}
                    type="text" label="Świadkowa"/>
         <TextField id="planName" color="secondary" variant="outlined"
                    style={{marginTop: '16px', width: '600px'}}
-                   value={bestMan}
+                   defaultValue={bestMan}
                    onChange={(event) => setBestMan(event.target.value)}
                    type="text" label="Świadek"/>
       </Box>
       <TextField id="planNotes" color="secondary" variant="outlined"
                  style={{marginTop: '16px', width: '600px', marginLeft: '32px', height: '100%'}}
-                 value={notes ?? ""} multiline rows={8}
+                 defaultValue={notes ?? ""} multiline rows={8}
                  onChange={(event) => setNotes(event.target.value)}
                  type="text" label="Notatki"/>
     </Box>
