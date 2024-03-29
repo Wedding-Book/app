@@ -30,7 +30,7 @@ const handler = async (req: Request) => {
 
     const result: CostModel[] = [];
     let numberOfGuests = 0;
-    plan.invitationGuests.forEach(inv => numberOfGuests += inv.guests.length)
+    plan.invitationGuests.forEach((inv: any) => numberOfGuests += inv.guests.length)
     result.push({name: "Prezenty dla gości", price: (plan.guestGift.price ?? 0) , quantity: numberOfGuests})
     result.push({name: "Prezenty dla rodziców", price: (plan.parentGift.price ?? 0), quantity: plan.parentGift.quantity})
     const pickedHall = plan.hallPropositions.filter(hall => hall.isPicked);
