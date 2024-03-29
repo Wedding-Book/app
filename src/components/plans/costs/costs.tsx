@@ -188,7 +188,7 @@ const Costs = ({planId}: CostsProps) => {
             <Typography style={{fontSize: '24px', color: 'secondary.main'}}>{rowId + 1}</Typography>
           </Grid>
           <Grid item xs="auto" display="flex" alignItems="end">
-            <TextField id="planName" color="secondary" variant="outlined"
+            <TextField id="costName" color="secondary" variant="outlined"
                        style={{marginTop: '16px', width: '100%'}}
                        size="small"
                        disabled={!row.id}
@@ -199,7 +199,7 @@ const Costs = ({planId}: CostsProps) => {
                        type="text" label="Koszt"/>
           </Grid>
           <Grid item xs="auto" display="flex" alignItems="end">
-            <TextField id="planName" color="secondary" variant="outlined"
+            <TextField id="costPrice" color="secondary" variant="outlined"
                        style={{marginTop: '16px', width: '100%'}}
                        disabled={!row.id}
                        size="small"
@@ -210,7 +210,7 @@ const Costs = ({planId}: CostsProps) => {
                        type="number" label="Wartość"/>
           </Grid>
           <Grid item xs="auto" display="flex" alignItems="end">
-            <TextField id="planName" color="secondary" variant="outlined"
+            <TextField id="costQuantity" color="secondary" variant="outlined"
                        style={{marginTop: '16px', width: '100%'}}
                        size="small"
                        onChange={(event) => setTmpQuantity(+event.target.value)}

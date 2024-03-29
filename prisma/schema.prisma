@@ -93,6 +93,7 @@ model Plan {
   trips            Trip[]
   parentGift       ParentGift?
   guestGift        GuestGift?
+  other            Other?
 }
 
 model InvitationGuest {
@@ -226,4 +227,49 @@ model AdditionalCost {
   quantity Int     @default(1)
   Plan     Plan?   @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId   String?
+}
+
+model Other {
+  id                       String  @id @default(cuid())
+  flowersUrl               String?
+  flowersPrice             Int?
+  flowersDescription       String?
+  photographerUrl          String?
+  photographerPrice        Int?
+  photographerDescription  String?
+  cameramanUrl             String?
+  cameramanPrice           Int?
+  cameramanDescription     String?
+  musicUrl                 String?
+  musicPrice               Int?
+  musicDescription         String?
+  confectioneryUrl         String?
+  confectioneryPrice       Int?
+  confectioneryDescription String?
+  alcoholUrl               String?
+  alcoholPrice             Int?
+  alcoholDescription       String?
+  drinksUrl                String?
+  drinksPrice              Int?
+  drinksDescription        String?
+  ceremonyUrl              String?
+  ceremonyPrice            Int?
+  ceremonyDescription      String?
+  brightsDressUrl          String?
+  brightsDressPrice        Int?
+  brightsDressDescription  String?
+  groomsSuitUrl            String?
+  groomsSuitPrice          Int?
+  groomsSuitDescription    String?
+  hairUrl                  String?
+  hairPrice                Int?
+  hairDescription          String?
+  beauticianUrl            String?
+  beauticianPrice          Int?
+  beauticianDescription    String?
+  carUrl                   String?
+  carPrice                 Int?
+  carDescription           String?
+  plan                     Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  planId                   String  @unique
 }
