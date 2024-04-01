@@ -39,6 +39,7 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
   const [notes, setNotes] = useState<string | undefined>();
   const [eventDate, setEventDate] = useState<Dayjs | null>();
   const [configGiftsEnabled, setConfigGiftsEnabled] = useState<boolean>(false);
+  const [configAdditionalGuestsEnabled, setConfigAdditionalGuestsEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     setName(initName);
@@ -49,6 +50,7 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
     setBridesMaid(initBridesMaid);
     setEventDate(dayjs(initEventDate));
     setConfigGiftsEnabled(planConfig.giftsEnabled);
+    setConfigAdditionalGuestsEnabled(planConfig.additionalGuestsEnabled);
     setNotes(initNotes)
   }, [initName, initDescription, initNotes, initEventDate, planConfig]);
 
@@ -71,7 +73,18 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({planId: id, giftsEnabled: !configGiftsEnabled})
+      body: JSON.stringify({planId: id, giftsEnabled: !configGiftsEnabled, additionalGuestsEnabled: configAdditionalGuestsEnabled})
+    });
+  }
+
+  const handleAdditionalGiftsEnabledChange = async () => {
+    setConfigAdditionalGuestsEnabled(!configAdditionalGuestsEnabled);
+    await fetch('/api/plan/config', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({planId: id, giftsEnabled: configGiftsEnabled, additionalGuestsEnabled: !configAdditionalGuestsEnabled})
     });
   }
 
@@ -146,11 +159,14 @@ const Details = ({id, initName, initDescription, initNotes, initEventDate, planC
       <DeletePlan id={id}/>
     </div>
 
-    <Typography sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}>Konfiguracja wydarzenia</Typography>
     <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
                       control={<Switch checked={configGiftsEnabled}
                                        onChange={handleGiftsEnabledChange}/>}
                       label="Prezentownik na liście gości"/>
+    <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
+                      control={<Switch checked={configAdditionalGuestsEnabled}
+                                       onChange={handleAdditionalGiftsEnabledChange}/>}
+                      label="Dodatkowi goście"/>
   </Box>
 }
 

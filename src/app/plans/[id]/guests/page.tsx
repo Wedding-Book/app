@@ -9,7 +9,8 @@ const GuestPage = async ({params}: { params: { id: string } }) => {
 
   const invitationGuests = await prisma.plan.findUnique({where: {id: params.id}, include: {invitationGuests: {include: {guests: true}}, config: true}});
 
-  return <Guests initInvitationGuests={invitationGuests.invitationGuests} planId={params.id} giftsEnabled={invitationGuests.config.giftsEnabled}/>
+  return <Guests initInvitationGuests={invitationGuests.invitationGuests} planId={params.id}
+                 giftsEnabled={invitationGuests.config.giftsEnabled} additionalGuestsEnabled={invitationGuests.config.additionalGuestsEnabled}/>
 }
 
 export default GuestPage;

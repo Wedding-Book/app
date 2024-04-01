@@ -16,15 +16,16 @@ const handler = async (req: Request) => {
         status: 201
       });
   } else if (req.method === 'PUT') {
-    const {invitationId, moneyGift, otherGift}: {
+    const {invitationId, moneyGift, otherGift, isAdditional}: {
       invitationId: string,
       moneyGift: number,
-      otherGift: string
+      otherGift: string,
+      isAdditional: boolean
     } = await req.json();
 
     const updatedInvitation = await prisma.invitationGuest.update({
       where: {id: invitationId},
-      data: {moneyGift, otherGift}
+      data: {moneyGift, otherGift, isAdditional}
     });
 
     return new Response(

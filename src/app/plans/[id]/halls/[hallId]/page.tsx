@@ -21,6 +21,7 @@ const HallPage = async ({params}: { params: { id: string, hallId: string } }) =>
                initPersonCost={displayedHall.personCost}
                initAdditionalCost={displayedHall.additionalCost}
                initAlcoholInPrice={displayedHall.alcoholInPrice}
+               initBasePrice={displayedHall.basePrice}
                initAlcoholPrice={displayedHall.alcoholPrice}
                initDrinksInPrice={displayedHall.drinksInPrice}
                initDrinksPrice={displayedHall.drinksPrice}

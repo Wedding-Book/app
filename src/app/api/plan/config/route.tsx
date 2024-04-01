@@ -2,14 +2,15 @@ import prisma from '@/lib/prisma/prisma';
 
 const handler = async (req: Request) => {
   if (req.method === 'PUT') {
-    const {planId, giftsEnabled}: {
+    const {planId, giftsEnabled, additionalGuestsEnabled}: {
       planId: string,
-      giftsEnabled: boolean
+      giftsEnabled: boolean,
+      additionalGuestsEnabled: boolean
     } = await req.json();
 
     const plan = await prisma.plan.findUnique({where: {id: planId}});
 
-    const updatedPlanConfig = await prisma.planConfig.update({where: {id: plan.planConfigId}, data: {giftsEnabled: giftsEnabled}});
+    const updatedPlanConfig = await prisma.planConfig.update({where: {id: plan.planConfigId}, data: {giftsEnabled: giftsEnabled, additionalGuestsEnabled}});
 
     return new Response(
       JSON.stringify(updatedPlanConfig), {

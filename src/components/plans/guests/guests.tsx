@@ -10,6 +10,8 @@ import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Loading from '@/components/loading/loading';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 type InvitationGuest = {
@@ -17,6 +19,7 @@ type InvitationGuest = {
   guests: Guest[],
   moneyGift?: number,
   otherGift?: string,
+  isAdditional: boolean
 }
 
 type Guest = {
@@ -24,7 +27,12 @@ type Guest = {
   fullName: string,
 }
 
-const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGuests: InvitationGuest[], planId: string, giftsEnabled: boolean }) => {
+const Guests = ({initInvitationGuests, planId, giftsEnabled, additionalGuestsEnabled}: {
+  initInvitationGuests: InvitationGuest[],
+  planId: string,
+  giftsEnabled: boolean,
+  additionalGuestsEnabled: boolean
+}) => {
   const [invitationGuests, setInvitationGuests] = useState<InvitationGuest[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [tmpFullName, setTmpFullName] = useState<string>("");
@@ -68,14 +76,14 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
         'Content-Type': 'application/json',
       },
     }).then((response) => {
-          setInvitationGuests(
-            prevState => [
-              ...prevState.slice(0, rid),
-              ...prevState.slice(rid + 1)
-            ]
-          );
-        }
-      );
+        setInvitationGuests(
+          prevState => [
+            ...prevState.slice(0, rid),
+            ...prevState.slice(rid + 1)
+          ]
+        );
+      }
+    );
   }
 
   const handleColumnDeleteClick = async (rid: number, cid: number) => {
@@ -85,18 +93,18 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
         'Content-Type': 'application/json',
       },
     }).then((response) => {
-          setInvitationGuests(
-            prevState => [
-              ...prevState.slice(0, rid),
-              {
-                ...prevState[rid],
-                guests: [...prevState[rid].guests.slice(0, cid), ...prevState[rid].guests.slice(cid + 1)]
-              },
-              ...prevState.slice(rid + 1)
-            ]
-          );
-        }
-      );
+        setInvitationGuests(
+          prevState => [
+            ...prevState.slice(0, rid),
+            {
+              ...prevState[rid],
+              guests: [...prevState[rid].guests.slice(0, cid), ...prevState[rid].guests.slice(cid + 1)]
+            },
+            ...prevState.slice(rid + 1)
+          ]
+        );
+      }
+    );
 
   }
 
@@ -114,10 +122,39 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
         setInvitationGuests(
           prevState => [
             ...prevState.slice(0),
-            {id: data.id, guests: [{fullName: ""}], moneyGift: 0}
+            {id: data.id, guests: [{fullName: ""}], moneyGift: 0, isAdditional: false}
           ]
         );
       })
+  }
+
+  const handleIsAdditional = async (rowIndex: number) => {
+    await fetch(`/api/plan/invitations`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        invitationId: invitationGuests[rowIndex].id,
+        moneyGift: invitationGuests[rowIndex].moneyGift,
+        otherGift: invitationGuests[rowIndex].otherGift,
+        isAdditional: !invitationGuests[rowIndex].isAdditional
+      })
+    }).then((res) => {
+      return res.json();
+    })
+      .then((data) => {
+        setInvitationGuests(
+          prevState => [
+            ...prevState.slice(0, rowIndex),
+            {
+              ...prevState[rowIndex],
+              isAdditional: data.isAdditional
+            },
+            ...prevState.slice(rowIndex + 1)
+          ]
+        );
+      });
   }
 
   const onChangeFullName = (value: string) => {
@@ -140,7 +177,10 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
             ...prevState.slice(0, rowIndex),
             {
               ...prevState[rowIndex],
-              guests: [...prevState[rowIndex].guests.slice(0, columnIndex), {...prevState[rowIndex].guests[columnIndex], fullName: data.fullName}, ...prevState[rowIndex].guests.slice(columnIndex + 1)]
+              guests: [...prevState[rowIndex].guests.slice(0, columnIndex), {
+                ...prevState[rowIndex].guests[columnIndex],
+                fullName: data.fullName
+              }, ...prevState[rowIndex].guests.slice(columnIndex + 1)]
             },
             ...prevState.slice(rowIndex + 1)
           ]
@@ -159,7 +199,12 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({invitationId: invitationGuests[rowIndex].id, moneyGift: +tmpMoneyGift, otherGift: invitationGuests[rowIndex].otherGift})
+      body: JSON.stringify({
+        invitationId: invitationGuests[rowIndex].id,
+        moneyGift: +tmpMoneyGift,
+        otherGift: invitationGuests[rowIndex].otherGift,
+        isAdditional: invitationGuests[rowIndex].isAdditional
+      })
     }).then((res) => {
       return res.json();
     })
@@ -188,7 +233,12 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({invitationId: invitationGuests[rowIndex].id, otherGift: tmpOtherGift, moneyGift: !invitationGuests[rowIndex].moneyGift ? 0 : invitationGuests[rowIndex].moneyGift})
+      body: JSON.stringify({
+        invitationId: invitationGuests[rowIndex].id,
+        otherGift: tmpOtherGift,
+        moneyGift: !invitationGuests[rowIndex].moneyGift ? 0 : invitationGuests[rowIndex].moneyGift,
+        isAdditional: invitationGuests[rowIndex].isAdditional
+      })
     }).then((res) => {
       return res.json();
     })
@@ -212,13 +262,27 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
     return invitationGuests.reduce((acc, invitation) => acc + invitation.guests.length, 0);
   }
 
+  const calculateAdditionalGuests = () => {
+    return invitationGuests.reduce((acc, invitation) => {
+      if (invitation.isAdditional) {
+        return acc + invitation.guests.length;
+      }
+      return acc;
+    }, 0);
+  }
+
+  const calculateWithoutAdditionalGuests = () => {
+    return calculateGuests() - calculateAdditionalGuests();
+  }
+
   if (loading) {
     return <Loading/>
   }
 
   return (
     <Box sx={{flexGrow: 1, margin: '12px'}}>
-      <Typography sx={{fontSize: 28, color: 'secondary.main'}}>Lista gości ({calculateGuests()})</Typography>
+      {!additionalGuestsEnabled && <Typography sx={{fontSize: 28, color: 'secondary.main'}}>Lista gości ({calculateWithoutAdditionalGuests()})</Typography>}
+      {additionalGuestsEnabled && <Typography sx={{fontSize: 28, color: 'secondary.main'}}>Lista gości ({calculateGuests()} - {calculateAdditionalGuests()} = {calculateWithoutAdditionalGuests()})</Typography>}
       {invitationGuests.map((row, rowId) =>
         <Grid container spacing={2} key={rowId} display="flex" alignItems="end">
           <Grid item xs="auto">
@@ -265,6 +329,14 @@ const Guests = ({initInvitationGuests, planId, giftsEnabled}: { initInvitationGu
                              onBlur={(event) => onBlurOtherGift(rowId)}
                              defaultValue={row.otherGift ?? ""}
                              type="text" label="Inne prezenty"/>
+              </Grid>
+          </>}
+          {additionalGuestsEnabled && <>
+              <Grid item xs={1}>
+                  <FormControlLabel sx={{fontSize: 28, color: 'secondary.main', marginTop: '16px'}}
+                                    control={<Switch checked={row.isAdditional}
+                                                     onChange={env => handleIsAdditional(rowId)}/>}
+                                    label="Gość dodatkowy"/>
               </Grid>
           </>}
           <Grid item xs="auto">

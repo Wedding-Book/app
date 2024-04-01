@@ -97,12 +97,13 @@ model Plan {
 }
 
 model InvitationGuest {
-  id        String  @id @default(cuid())
-  planId    String
-  plan      Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  guests    Guest[]
-  moneyGift Int?
-  otherGift String?
+  id           String   @id @default(cuid())
+  planId       String
+  plan         Plan     @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  guests       Guest[]
+  moneyGift    Int?
+  otherGift    String?
+  isAdditional Boolean @default(false)
 }
 
 model Guest {
@@ -113,9 +114,10 @@ model Guest {
 }
 
 model PlanConfig {
-  id           String  @id @default(cuid())
-  giftsEnabled Boolean @default(false)
-  Plan         Plan?
+  id                      String  @id @default(cuid())
+  giftsEnabled            Boolean @default(false)
+  additionalGuestsEnabled Boolean @default(true)
+  Plan                    Plan?
 }
 
 model Todo {
