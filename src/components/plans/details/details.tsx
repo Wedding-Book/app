@@ -13,7 +13,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 
 type PlanConfig = {
-  giftsEnabled: boolean
+  giftsEnabled: boolean,
+  additionalGuestsEnabled: boolean
 }
 
 type Props = {
