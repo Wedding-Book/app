@@ -20,7 +20,6 @@ const handler = async (req: Request) => {
       fullName: string,
     } = await req.json();
 
-    if (fullName) {
       const updatedGuest = await prisma.guest.update({where: {id: guestId}, data: {fullName}});
 
       return new Response(
@@ -28,12 +27,6 @@ const handler = async (req: Request) => {
           headers: {"content-type": "application/json"},
           status: 200
         });
-    }
-    return new Response(
-      JSON.stringify("Guest Not Found"), {
-        headers: {"content-type": "application/json"},
-        status: 404
-      });
   } else if (req.method === 'DELETE') {
     const guestId = (req as NextRequest).nextUrl.searchParams.get('id');
 
