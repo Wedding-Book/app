@@ -7,10 +7,23 @@ const GuestPage = async ({params}: { params: { id: string } }) => {
   await serverSessionChecker({noSessionPath: '/login'});
   await unavailablePlanRedirector(params.id);
 
-  const invitationGuests = await prisma.plan.findUnique({where: {id: params.id}, include: {invitationGuests: {include: {guests: true}}, config: true}});
+  const invitationGuests = await prisma.plan.findUnique({
+    where: {id: params.id}, include: {
+      invitationGuests: {
+        include: {
+          guests: {
+            orderBy: {
+              id: 'asc',
+            }
+          }
+        }
+      }, config: true
+    }
+  });
 
   return <Guests initInvitationGuests={invitationGuests.invitationGuests} planId={params.id}
-                 giftsEnabled={invitationGuests.config.giftsEnabled} additionalGuestsEnabled={invitationGuests.config.additionalGuestsEnabled}/>
+                 giftsEnabled={invitationGuests.config.giftsEnabled}
+                 additionalGuestsEnabled={invitationGuests.config.additionalGuestsEnabled}/>
 }
 
 export default GuestPage;
