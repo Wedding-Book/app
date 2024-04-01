@@ -8,7 +8,7 @@ const handler = async (req: Request) => {
     } = await req.json();
 
     const createdInvitation = await prisma.invitationGuest.create({data: {planId, moneyGift: 0}});
-    const createdGuest = await prisma.guest.create({data: {invitationId: createdInvitation.id, fullName: ""}});
+    const createdGuest = await prisma.guest.create({data: {invitationId: createdInvitation.id, fullName: "Gość"}});
 
     return new Response(
       JSON.stringify(createdInvitation), {
