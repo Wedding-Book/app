@@ -204,7 +204,7 @@ model ParentGift {
   imgUrl      String?
   offerUrl    String?
   name        String
-  description String
+  description String?
   quantity    Int     @default(4)
   price       Int
   plan        Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
@@ -216,7 +216,7 @@ model GuestGift {
   imgUrl      String?
   offerUrl    String?
   name        String
-  description String
+  description String?
   price       Int
   plan        Plan    @relation(fields: [planId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   planId      String  @unique
