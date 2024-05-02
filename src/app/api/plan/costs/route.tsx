@@ -65,10 +65,8 @@ const handler = async (req: Request) => {
     }
     const pickedTrip = plan.trips.filter((trip: any) => trip.isPicked);
     if (!!pickedTrip) {
-      result.push({name: "Podróż", price: +pickedTrip.price, quantity: 1});
+      result.push({name: "Podróż", price: +pickedTrip[0].price, quantity: 1});
     }
-    console.log(result)
-    console.log([...result, ...plan.additionalCosts])
     return new Response(JSON.stringify([...result, ...plan.additionalCosts]), {
       headers: {"content-type": "application/json"},
       status: 200
