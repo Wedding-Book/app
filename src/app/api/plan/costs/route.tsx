@@ -32,41 +32,43 @@ const handler = async (req: Request) => {
     const result: CostModel[] = [];
     let numberOfGuests = 0;
     plan.invitationGuests.forEach((inv: any) => numberOfGuests += inv.guests.length)
-    result.push({name: "Prezenty dla gości", price: (plan.guestGift?.price ?? 0) , quantity: numberOfGuests})
-    result.push({name: "Prezenty dla rodziców", price: (plan.parentGift?.price ?? 0), quantity: plan.parentGift?.quantity})
+    result.push({name: "Prezenty dla gości", price: (+plan.guestGift?.price) , quantity: numberOfGuests})
+    result.push({name: "Prezenty dla rodziców", price: (+plan.parentGift?.price), quantity: plan.parentGift?.quantity})
     const pickedHall = plan.hallPropositions.filter((hall: any) => hall.isPicked);
     if (!!pickedHall) {
-      result.push({name: "Podstawowa cena sali", price: pickedHall.basePrice ?? 0, quantity: 1});
-      result.push({name: "Cena gości", price: pickedHall.personCost ?? 0, quantity: numberOfGuests});
-      result.push({name: "Dodatkowe wydatki na salę", price: pickedHall.additionalCost ?? 0, quantity: 1});
-      result.push({name: "Goście hotelowi na sali", price: pickedHall.hotelPricePerPerson ?? 0, quantity: pickedHall.numberOfHotelGuests ?? 0});
-      result.push({name: "Dodatkowe opłaty dekorację sali", price: pickedHall.additionalDecorationPrice ?? 0, quantity: 1});
-      result.push({name: "Cena ceremonii weselenj na sali", price: pickedHall.weddingCeremonyPrice ?? 0, quantity: 1});
-      result.push({name: "Cena za alkohol", price: pickedHall.alcoholPrice ?? 0, quantity: 1});
-      result.push({name: "Cena za napoje", price: pickedHall.drinksPrice ?? 0, quantity: 1});
-      result.push({name: "Cena za napoje", price: pickedHall.drinksPrice ?? 0, quantity: 1});
-      result.push({name: "Cena za desery", price: pickedHall.desertsPrice ?? 0, quantity: 1});
-      result.push({name: "Cena za owoce", price: pickedHall.fruitsPrice ?? 0, quantity: 1});
+      result.push({name: "Podstawowa cena sali", price: +pickedHall[0].basePrice, quantity: 1});
+      result.push({name: "Cena gości", price: +pickedHall[0].personCost, quantity: numberOfGuests});
+      result.push({name: "Dodatkowe wydatki na salę", price: +pickedHall[0].additionalCost, quantity: 1});
+      result.push({name: "Goście hotelowi na sali", price: +pickedHall[0].hotelPricePerPerson, quantity: pickedHall[0].numberOfHotelGuests ?? 0});
+      result.push({name: "Dodatkowe opłaty dekorację sali", price: +pickedHall[0].additionalDecorationPrice, quantity: 1});
+      result.push({name: "Cena ceremonii weselenj na sali", price: +pickedHall[0].weddingCeremonyPrice, quantity: 1});
+      result.push({name: "Cena za alkohol", price: +pickedHall[0].alcoholPrice, quantity: 1});
+      result.push({name: "Cena za napoje", price: +pickedHall[0].drinksPrice, quantity: 1});
+      result.push({name: "Cena za napoje", price: +pickedHall[0].drinksPrice, quantity: 1});
+      result.push({name: "Cena za desery", price: +pickedHall[0].desertsPrice, quantity: 1});
+      result.push({name: "Cena za owoce", price: +pickedHall[0].fruitsPrice, quantity: 1});
     }
     if (!!plan.other) {
-      result.push({name: "Kwiaty", price: plan.other.flowersPrice ?? 0, quantity: 1});
-      result.push({name: "Fotograf", price: plan.other.photographerPrice ?? 0, quantity: 1});
-      result.push({name: "Kamerzysta", price: plan.other.cameramanPrice ?? 0, quantity: 1});
-      result.push({name: "Muzyka", price: plan.other.musicPrice ?? 0, quantity: 1});
-      result.push({name: "Słodkości", price: plan.other.confectioneryPrice ?? 0, quantity: 1});
-      result.push({name: "Alkohol", price: plan.other.alcoholPrice ?? 0, quantity: 1});
-      result.push({name: "Napoje", price: plan.other.drinksPrice ?? 0, quantity: 1});
-      result.push({name: "Ceremonia", price: plan.other.ceremonyPrice ?? 0, quantity: 1});
-      result.push({name: "Suknia ślubna", price: plan.other.brightsDressPrice ?? 0, quantity: 1});
-      result.push({name: "Garnitur", price: plan.other.groomsSuitPrice ?? 0, quantity: 1});
-      result.push({name: "Fryzjer", price: plan.other.hairPrice ?? 0, quantity: 1});
-      result.push({name: "Kosmetyczka", price: plan.other.beauticianPrice ?? 0, quantity: 1});
-      result.push({name: "Samochód", price: plan.other.carPrice ?? 0, quantity: 1});
+      result.push({name: "Kwiaty", price: +plan.other.flowersPrice, quantity: 1});
+      result.push({name: "Fotograf", price: +plan.other.photographerPrice, quantity: 1});
+      result.push({name: "Kamerzysta", price: +plan.other.cameramanPrice, quantity: 1});
+      result.push({name: "Muzyka", price: +plan.other.musicPrice, quantity: 1});
+      result.push({name: "Słodkości", price: +plan.other.confectioneryPrice, quantity: 1});
+      result.push({name: "Alkohol", price: +plan.other.alcoholPrice, quantity: 1});
+      result.push({name: "Napoje", price: +plan.other.drinksPrice, quantity: 1});
+      result.push({name: "Ceremonia", price: +plan.other.ceremonyPrice, quantity: 1});
+      result.push({name: "Suknia ślubna", price: +plan.other.brightsDressPrice, quantity: 1});
+      result.push({name: "Garnitur", price: +plan.other.groomsSuitPrice, quantity: 1});
+      result.push({name: "Fryzjer", price: +plan.other.hairPrice, quantity: 1});
+      result.push({name: "Kosmetyczka", price: +plan.other.beauticianPrice, quantity: 1});
+      result.push({name: "Samochód", price: +plan.other.carPrice, quantity: 1});
     }
     const pickedTrip = plan.trips.filter((trip: any) => trip.isPicked);
     if (!!pickedTrip) {
-      result.push({name: "Podróż", price: pickedTrip.price ?? 0, quantity: 1});
+      result.push({name: "Podróż", price: +pickedTrip.price, quantity: 1});
     }
+    console.log(result)
+    console.log([...result, ...plan.additionalCosts])
     return new Response(JSON.stringify([...result, ...plan.additionalCosts]), {
       headers: {"content-type": "application/json"},
       status: 200
