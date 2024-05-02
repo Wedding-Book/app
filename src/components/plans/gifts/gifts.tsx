@@ -64,6 +64,7 @@ const Gifts = ({planId, initGuestGift, initParentGift}: {
         isParent: true,
         name: parentGiftName,
         description: parentGiftDescription,
+        quantity: parentGiftQuantity,
         price: parentGiftPrice,
         imgUrl: parentGiftImgUrl,
         offerUrl: parentGiftOfferUrl
